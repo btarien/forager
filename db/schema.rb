@@ -10,10 +10,56 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_23_112709) do
+ActiveRecord::Schema.define(version: 2020_11_23_152125) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "favorites", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["product_id"], name: "index_favorites_on_product_id"
+    t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
+
+  create_table "groceries", force: :cascade do |t|
+    t.integer "quantity"
+    t.bigint "user_id", null: false
+    t.bigint "store_product_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["store_product_id"], name: "index_groceries_on_store_product_id"
+    t.index ["user_id"], name: "index_groceries_on_user_id"
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string "name"
+    t.string "brand"
+    t.string "nutriscore"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "store_products", force: :cascade do |t|
+    t.float "price"
+    t.bigint "product_id", null: false
+    t.bigint "store_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["product_id"], name: "index_store_products_on_product_id"
+    t.index ["store_id"], name: "index_store_products_on_store_id"
+  end
+
+  create_table "stores", force: :cascade do |t|
+    t.string "name"
+    t.string "address"
+    t.float "latitude"
+    t.float "longitude"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -27,4 +73,10 @@ ActiveRecord::Schema.define(version: 2020_11_23_112709) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "favorites", "products"
+  add_foreign_key "favorites", "users"
+  add_foreign_key "groceries", "store_products"
+  add_foreign_key "groceries", "users"
+  add_foreign_key "store_products", "products"
+  add_foreign_key "store_products", "stores"
 end
