@@ -1,0 +1,5 @@
+<div>
+  <% @groceries.each do |grocery| %>
+  <%= grocery.store_product.product.name %>
+  <% end %>
+</div>
