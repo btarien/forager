@@ -1,5 +1,24 @@
-<div>
+<div class="bg-success text-white">
+  <h1 class="p-2 text-center">Favorites</h1>
+</div>
+
+<div class="main-card">
   <% @groceries.each do |grocery| %>
-  <%= grocery.store_product.product.name %>
+    <img class="product-img" src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80" alt="">
+    <div class="product-info">
+      <div class="product-details">
+        <p class="product-name"><%= grocery.store_product.product.name %></p>
+        <p class="store-name">
+          <select class="edit-box">
+            <option>Rewe</option>
+            <option>Aldi</option>
+            <option>Lidl</option>
+            <option selected>Edeka</option>
+          </select>
+      </p>
+      </div>
+      <img src="nutriscore-a.svg"/>
+      <i class="fas fa-shopping-basket fa-2x"></i>
+    </div>
   <% end %>
 </div>
