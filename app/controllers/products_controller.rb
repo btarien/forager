@@ -10,8 +10,8 @@ class ProductsController < ApplicationController
         lat: store.latitude,
         lng: store.longitude
       }
-      hash_of_store_products
     end
+    hash_of_store_products
   end
     private
     def hash_of_store_products
