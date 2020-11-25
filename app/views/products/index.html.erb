@@ -13,7 +13,7 @@
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
     <div class="modal-dialog" role="document">
-      <div class="modal-content">
+      <div class="modal-content p-3">
         <div class="modal-header row">
           <div class="back">
             <i class="fas fa-arrow-left" data-dismiss="modal"></i>
@@ -36,13 +36,61 @@
             </div>
           </div>
           <div class="row justify-content-between">
-            <h3><%= JSON.parse(product.nutrition, symbolize_names: true)[:calories] %>cal</h3>
-            <h3><%= JSON.parse(product.nutrition, symbolize_names: true)[:carbohydrates][:total] %>g carbs</h3>
-            <h3><%= JSON.parse(product.nutrition, symbolize_names: true)[:fat][:total] %>g fat</h3>
-            <h3><%= JSON.parse(product.nutrition, symbolize_names: true)[:protein]%>g protein</h3>
+            <div class="text-center">
+              <h3><%= JSON.parse(product.nutrition, symbolize_names: true)[:calories] %></h3>
+              <p>cal</p>
+            </div>
+            <div class="text-center">
+              <h3><%= JSON.parse(product.nutrition, symbolize_names: true)[:carbohydrates][:total] %> g</h3>
+              <p>carbs</p>
+            </div>
+            <div class="text-center">
+              <h3><%= JSON.parse(product.nutrition, symbolize_names: true)[:fat][:total] %> g</h3>
+              <p>fat</p>
+            </div>
+            <div class="text-center">
+              <h3><%= JSON.parse(product.nutrition, symbolize_names: true)[:protein]%> g</h3>
+              <p>protein</p>
+            </div>
+          </div>
+          <div class="row justify-content-between">
+            <h4>Nutrition Facts</h4>
+            <h4>per 100g</h4>
+          </div>
+          <% JSON.parse(product.nutrition, symbolize_names: true).each do |nutrient, value| %>
+              <% if value.class == Hash %>
+                <% value.each do |subnutrient, grams| %>
+                  <div class="row justify-content-between">
+                    <h4><%= subnutrient %></h4>
+                    <% if grams.nil? %>
+                      <h4>-</h4>
+                    <% else %>
+                      <h4><%= grams %> g</h4>
+                    <% end %>
+                  </div>
+                <% end %>
+              <% else %>
+                <div class="row justify-content-between">
+                  <h4><%= nutrient %></h4>
+                  <h4><%= value %> g</h4>
+                </div>
+              <% end %>
+          <% end %>
+          <div class="row">
+            <h3>Ingredients</h3>
+            <p><%= product.ingredients %></p>
           </div>
         </div>
       </div>
     </div>
   </div>
 <% end %>
+
+
+
+
+
+
+
+
+
