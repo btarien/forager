@@ -30,11 +30,11 @@ StoreProduct.create!(price: 0.5, product: Product.third, store: Store.first)
 
 StoreProduct.create!(price: 2.5, product: Product.fourth, store: Store.second)
 StoreProduct.create!(price: 3.0, product: Product.fifth, store: Store.second)
-StoreProduct.create!(price: 0.5, product: Product.sixth, store: Store.second)
+StoreProduct.create!(price: 0.5, product: Product.all[5], store: Store.second)
 
 Grocery.create!(quantity: 2, user: User.first, store_product: StoreProduct.first)
 Grocery.create!(quantity: 1, user: User.first, store_product: StoreProduct.second)
 Grocery.create!(quantity: 6, user: User.first, store_product: StoreProduct.third)
 Grocery.create!(quantity: 3, user: User.first, store_product: StoreProduct.fourth)
 Grocery.create!(quantity: 1, user: User.first, store_product: StoreProduct.fifth)
-Grocery.create!(quantity: 4, user: User.first, store_product: StoreProduct.sixth)
+Grocery.create!(quantity: 4, user: User.first, store_product: StoreProduct.all[5])
