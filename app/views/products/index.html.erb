@@ -11,22 +11,28 @@
           </a>
       </div> -->
 
-
+<% hash = Hash.new %>
 <% @store_products.each do |store_product| %>
-<% @new_array = [] %>
-<% @stores.map do |store|  %>
-<% if store_product.store == store %>
-<% @new_array << store %>
+<% if hash.keys.include? store_product.product %>
+    <% hash[store_product.product] << store_product.store %>
+  <% else %>
+  <% hash[store_product.product] = [store_product.store] %>
 <% end %>
 <% end %>
+  
+
+
+
+<% hash.each do |product, store_array| %>
+
   <div class="main-card">
     <img class="product-img" src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80" alt="">
     <div class="product-info">
       <div class="product-details">
-        <p class="product-name"><%= store_product.product.name %></p>
+        <p class="product-name"><%= product.name %></p>
         <p class="store-name">
           <select class="edit-box">
-          <% @new_array.each do |new_store| %>
+          <% store_array.each do |new_store| %>
             <option><%= new_store.name %></option>
             <% end %>
           </select>
