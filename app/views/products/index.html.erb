@@ -24,61 +24,72 @@
           </div>
         </div>
         <div class="modal-body">
-          <div class="row">
-            <div class="border-bottom d-flex justify-content-between col-10">
-              <div>
-                <h1 class="modal-title"><%= product.name %></h1>
-                <h2><%= product.brand %></h2>
-              </div>
-              <div class="d-flex align-items-center col-2">
-                <h1><%= product.nutriscore %></h1>
-              </div>
+          <div class="row border-bottom d-flex justify-content-between">
+            <div class="col-10">
+              <h1 class="modal-title"><%= product.name %></h1>
+              <h2><%= product.brand %></h2>
+            </div>
+            <div class="d-flex align-items-center col-2">
+              <h1><%= product.nutriscore %></h1>
             </div>
           </div>
           <div class="row justify-content-between">
+            <% nutrition = JSON.parse(product.nutrition, symbolize_names: true) %>
             <div class="text-center">
-              <h3><%= JSON.parse(product.nutrition, symbolize_names: true)[:calories] %></h3>
+              <ul class="chart-skills">
+                <li><span></span></li>
+                <li><span></span></li>
+                <li><span></span></li>
+              </ul>
+              <h3><%= nutrition[:calories] %></h3>
               <p>cal</p>
             </div>
             <div class="text-center">
-              <h3><%= JSON.parse(product.nutrition, symbolize_names: true)[:carbohydrates][:total] %> g</h3>
+              <p style="color: blue"><%= ((nutrition[:carbohydrates][:total] * 4).fdiv(nutrition[:calories]) * 100).round %>%</p>
+              <h3><%= nutrition[:carbohydrates][:total] %> g</h3>
               <p>carbs</p>
             </div>
             <div class="text-center">
-              <h3><%= JSON.parse(product.nutrition, symbolize_names: true)[:fat][:total] %> g</h3>
+              <p style="color: red"><%= ((nutrition[:fat][:total] * 4).fdiv(nutrition[:calories]) * 100).round %>%</p>
+              <h3><%= nutrition[:fat][:total] %> g</h3>
               <p>fat</p>
             </div>
             <div class="text-center">
-              <h3><%= JSON.parse(product.nutrition, symbolize_names: true)[:protein]%> g</h3>
+              <p style="color: purple"><%= ((nutrition[:protein] * 4).fdiv(nutrition[:calories]) * 100).round %>%</p>
+              <h3><%= nutrition[:protein]%> g</h3>
               <p>protein</p>
             </div>
           </div>
-          <div class="row justify-content-between">
-            <h4>Nutrition Facts</h4>
-            <h4>per 100g</h4>
+          <div class="row justify-content-between bg-light p-2">
+            <h3>Nutrition Facts</h3>
+            <h3>per 100g</h3>
           </div>
-          <% JSON.parse(product.nutrition, symbolize_names: true).each do |nutrient, value| %>
+          <% nutrition.each do |nutrient, value| %>
               <% if value.class == Hash %>
-                <% value.each do |subnutrient, grams| %>
-                  <div class="row justify-content-between">
-                    <h4><%= subnutrient %></h4>
+                <div class="row justify-content-between px-2">
+                  <h4><%= nutrient.capitalize %></h4>
+                  <h4><%= value.values.first %> g</h4>
+                </div>
+                <% value.except(:total).each do |subnutrient, grams| %>
+                  <div class="row justify-content-between ml-1 px-2">
+                    <h4 class="font-weight-light"><%= subnutrient.capitalize %></h4>
                     <% if grams.nil? %>
-                      <h4>-</h4>
+                      <h4 class="font-weight-light">-</h4>
                     <% else %>
-                      <h4><%= grams %> g</h4>
+                      <h4 class="font-weight-light"><%= grams %> g</h4>
                     <% end %>
                   </div>
                 <% end %>
               <% else %>
-                <div class="row justify-content-between">
-                  <h4><%= nutrient %></h4>
+                <div class="row justify-content-between px-2">
+                  <h4><%= nutrient.capitalize %></h4>
                   <h4><%= value %> g</h4>
                 </div>
               <% end %>
           <% end %>
-          <div class="row">
+          <div class="row mt-3">
             <h3>Ingredients</h3>
-            <p><%= product.ingredients %></p>
+            <p class="p-2"><%= product.ingredients %></p>
           </div>
         </div>
       </div>
