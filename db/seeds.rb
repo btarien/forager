@@ -1,9 +1,14 @@
 puts 'clearing db...'
 Favorite.destroy_all
 Grocery.destroy_all
+User.destroy_all
 StoreProduct.destroy_all
 Product.destroy_all
 Store.destroy_all
+
+puts 'creating users...'
+User.create!(email: "alice@example.com", password: "123456")
+User.create!(email: "bob@example.com", password: "123456")
 
 puts 'creating products...'
 Product.create!(name: 'Skyr Style Mango',
@@ -50,6 +55,97 @@ Product.create!(name: 'Philadelphia Original',
   },
   ingredients: "full fat soft cheese , salt, stabiliser (locust bean gum), acid (citric acid)"
 )
+Product.create!(name: 'Flatbreads everything good grains crackers',
+  brand: 'Paskesz',
+  nutriscore: 'D',
+  nutrition: {
+    calories: 412,
+    fat: {
+      total: 6.8,
+      saturated: 1.1,
+      trans: nil,
+      polyunsaturated: nil,
+      monounsaturated: nil
+    },
+    carbohydrates: {
+      total: 74.9,
+      sugar: 6.2,
+      fiber: nil
+    },
+    protein: 5.4,
+    sodium: 0.7
+  },
+  ingredients: "Wheat flour, sesame seeds, extra virgin olive oil, onion powder, garlic powder, poppy seeds, water, salt, caraway seeds."
+)
+
+Product.create!(name: 'Red Bull',
+  brand: 'Red Bull',
+  nutriscore: 'E',
+  nutrition: {
+    calories: 46,
+    fat: {
+      total: 0,
+      saturated: 0,
+      trans: nil,
+      polyunsaturated: nil,
+      monounsaturated: nil
+    },
+    carbohydrates: {
+      total: 11,
+      sugar: 11,
+      fiber: nil
+    },
+    protein: 0,
+    sodium: 0.04
+  },
+  ingredients: "water, sucrose, glucose, acidity regulators (sodium citrates, magnesium carbionate), carbon dioxide, acidifier (citric acid), taurine 0,4%, caffeine 0,03%, inositol, vitamins (niacin, pantothenic acid, vitamin b6, vitamin b12), flavourings, colours (caramel, riboflavin)"
+)
+
+Product.create!(name: 'PB2 The Original Powdered Peanut Butter',
+  brand: 'Bell Plantation',
+  nutriscore: 'D',
+  nutrition: {
+    calories: 462,
+    fat: {
+      total: 11.54,
+      saturated: nil,
+      trans: nil,
+      polyunsaturated: nil,
+      monounsaturated: 8.33
+    },
+    carbohydrates: {
+      total: 38.46,
+      sugar: 15.38,
+      fiber: 7.7
+    },
+    protein: 46.15,
+    sodium: 2.76
+  },
+  ingredients: "Roasted peanuts, sugar and salt."
+)
+
+Product.create!(name: 'Organic Black Beans',
+  brand: 'Trader Joe\'s',
+  nutriscore: 'A',
+  nutrition: {
+    calories: 77,
+    fat: {
+      total: 0,
+      saturated: 0,
+      trans: 0,
+      polyunsaturated: nil,
+      monounsaturated: nil
+    },
+    carbohydrates: {
+      total: 14.62,
+      sugar: 0,
+      fiber: 3.1
+    },
+    protein: 5.38,
+    sodium: 0.108
+  },
+  ingredients: "Organic black beans, water, sea salt."
+)
 
 puts 'creating stores...'
 Store.create!(name: 'Rewe', address: 'Balanstraße 73, 81541 München')
@@ -57,19 +153,17 @@ Store.create!(name: 'Aldi', address: 'St.-Martin-Straße 57, 81669 München')
 Store.create!(name: 'Edeka', address: 'Rosenheimer Str. 205, 81669 München')
 
 puts 'creating store-products...'
-# Alpro yogurt in Rewe
-sp = StoreProduct.new(price: 3.25)
-sp.product = Product.first
-sp.store = Store.first
-sp.save!
-# Alpro yogurt in Edeka
-sp = StoreProduct.new(price: 3.25)
-sp.product = Product.first
-sp.store = Store.last
-sp.save!
-# Philadelphia cream cheese in Edeka
-sp = StoreProduct.new(price: 4.32)
-sp.product = Product.last
-sp.store = Store.last
-sp.save!
+StoreProduct.create!(price: 2.5, product: Product.first, store: Store.first)
+StoreProduct.create!(price: 3.0, product: Product.second, store: Store.first)
+StoreProduct.create!(price: 0.5, product: Product.third, store: Store.first)
 
+StoreProduct.create!(price: 2.5, product: Product.fourth, store: Store.second)
+StoreProduct.create!(price: 3.0, product: Product.fifth, store: Store.second)
+StoreProduct.create!(price: 0.5, product: Product.last, store: Store.second)
+
+Grocery.create!(quantity: 2, user: User.first, store_product: StoreProduct.first)
+Grocery.create!(quantity: 1, user: User.first, store_product: StoreProduct.second)
+Grocery.create!(quantity: 6, user: User.first, store_product: StoreProduct.third)
+Grocery.create!(quantity: 3, user: User.first, store_product: StoreProduct.fourth)
+Grocery.create!(quantity: 1, user: User.first, store_product: StoreProduct.fifth)
+Grocery.create!(quantity: 4, user: User.first, store_product: StoreProduct.last)
