@@ -1,3 +1,5 @@
+require 'json'
+
 puts 'clearing db...'
 Favorite.destroy_all
 Grocery.destroy_all
@@ -30,7 +32,7 @@ Product.create!(name: 'Skyr Style Mango',
     },
     protein: 5.2,
     sodium: 0.26
-  },
+  }.to_json,
   ingredients: "Soy base (water, peeled soy beans (13.9%)), sugar, mango (5%), passion fruit juice from fruit juice concentrate, stabilizer (pectins), acid regulators (sodium citrate, citric acid), tricalcium phosphate, sea salt, antioxidants (extracts with a high tocopherol content, fatty acid esters Ascorbic acid), flavors, vitamins (B2, B12, D2), yoghurt cultures (Str. Thermophilus, L. bulgaricus)."
 )
 Product.create!(name: 'Philadelphia Original',
@@ -52,7 +54,7 @@ Product.create!(name: 'Philadelphia Original',
     },
     protein: 5.4,
     sodium: 0.75
-  },
+  }.to_json,
   ingredients: "full fat soft cheese , salt, stabiliser (locust bean gum), acid (citric acid)"
 )
 Product.create!(name: 'Flatbreads everything good grains crackers',
@@ -74,7 +76,7 @@ Product.create!(name: 'Flatbreads everything good grains crackers',
     },
     protein: 5.4,
     sodium: 0.7
-  },
+  }.to_json,
   ingredients: "Wheat flour, sesame seeds, extra virgin olive oil, onion powder, garlic powder, poppy seeds, water, salt, caraway seeds."
 )
 
@@ -97,7 +99,7 @@ Product.create!(name: 'Red Bull',
     },
     protein: 0,
     sodium: 0.04
-  },
+  }.to_json,
   ingredients: "water, sucrose, glucose, acidity regulators (sodium citrates, magnesium carbionate), carbon dioxide, acidifier (citric acid), taurine 0,4%, caffeine 0,03%, inositol, vitamins (niacin, pantothenic acid, vitamin b6, vitamin b12), flavourings, colours (caramel, riboflavin)"
 )
 
@@ -120,7 +122,7 @@ Product.create!(name: 'PB2 The Original Powdered Peanut Butter',
     },
     protein: 46.15,
     sodium: 2.76
-  },
+  }.to_json,
   ingredients: "Roasted peanuts, sugar and salt."
 )
 
@@ -143,7 +145,7 @@ Product.create!(name: 'Organic Black Beans',
     },
     protein: 5.38,
     sodium: 0.108
-  },
+  }.to_json,
   ingredients: "Organic black beans, water, sea salt."
 )
 
