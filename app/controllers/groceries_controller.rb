@@ -7,7 +7,7 @@ class GroceriesController < ApplicationController
     if @grocery.nil?
       @grocery = Grocery.create(
         user: current_user,
-        store_product: StoreProduct.find(params[:store_product_id]),
+        store_product: StoreProduct.where(product_id: params["@grocery"][:product_id].to_i).find_by(store_id: params["@grocery"][:store_id].to_i),
         quantity: 1
       )
     else

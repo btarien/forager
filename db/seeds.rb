@@ -168,7 +168,5 @@ StoreProduct.create!(price: 0.5, product: Product.last, store: Store.first)
 Grocery.create!(quantity: 2, user: User.first, store_product: StoreProduct.first)
 Grocery.create!(quantity: 1, user: User.first, store_product: StoreProduct.second)
 Grocery.create!(quantity: 6, user: User.first, store_product: StoreProduct.third)
-Grocery.create!(quantity: 3, user: User.first, store_product: StoreProduct.fourth)
-Grocery.create!(quantity: 1, user: User.first, store_product: StoreProduct.fifth)
-Grocery.create!(quantity: 4, user: User.first, store_product: StoreProduct.all[5])
+
 
