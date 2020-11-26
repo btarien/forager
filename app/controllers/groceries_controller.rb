@@ -7,7 +7,6 @@ class GroceriesController < ApplicationController
       product = grocery.store_product.product
       shops = product.stores
       @stores << {product: grocery, store: shops}
-  
     end
   end
 
@@ -21,7 +20,7 @@ class GroceriesController < ApplicationController
         quantity: 1
       )
 
-      
+
    # else
      # grocery = Grocery.where(user: current_user, store_product: StoreProduct.find(params[:store_product_id])).last
     #  quantity = grocery.quantity + 1
@@ -29,14 +28,20 @@ class GroceriesController < ApplicationController
     #end
   end
   def update
-    grocery_params = params["grocery"]
-    current_store = StoreProduct.where(product_id: grocery_params[:product_id].to_i).find_by(store_id: grocery_params[:current_store_id].to_i)
-    current_store.update(in_grocery: false)
-    new_store_product = StoreProduct.create!(product_id: grocery_params[:product_id].to_i, store_id: grocery_params[:store_id].to_i)
-    @grocery = Grocery.create(
-        user: current_user,
-        store_product: new_store_product,
-        quantity: 1
-      )
+    grocery_params = groceries_params
+    strproduct = StoreProduct.find_by(product_id: grocery_params[:product_id], store_id: grocery_params[:store_id])
+    Grocery.find(grocery_params[:grocery_id]).update!(store_product: strproduct)
+    redirect_to groceries_path
+  end
+
+  def destroy
+    gro_to_delete = Grocery.find(params[:id]).destroy
+
+    redirect_to groceries_path
+  end
+  private
+
+  def groceries_params
+    params.require(:grocery).permit(:store_id, :product_id, :current_store_id, :grocery_id)
   end
 end

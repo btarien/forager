@@ -8,8 +8,8 @@
   <% @hash.each do | product, store_array | %>
   <div class="row d-flex align-items-center justify-content-between p-2 border-bottom">
     <img class="product-img" src="<%= product.product_img %>" alt="" data-toggle="modal" data-target="#product-info-<%= product.id %>">
-    <div class="col-4 p-0">
-      <h3 class="m-0 p-0"><%= product.name %></h3>
+    <div class="col-4">
+      <h3><%= product.name %></h3>
       <%= simple_form_for :@grocery, url: groceries_path do |f| %>
         <%= f.input :store_id, label: false, collection: store_array, input_html: {style: "width: 100px;"}%>
         <%= f.input :product_id, as: :hidden, input_html: {value: product.id} %>
@@ -17,7 +17,7 @@
     </div>
     <%= image_tag product.nutriscore_img, class: "nutriscore-img" %>
         <%= button_tag type: 'submit', class: "button postfix" do %>
-          <i class="fas fa-shopping-basket fa-2x" aria-hidden="true"></i>
+          <i class="fas fa-shopping-basket" aria-hidden="true"></i>
         <% end %>
       <% end %>
   </div>
