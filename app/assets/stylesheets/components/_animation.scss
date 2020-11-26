@@ -1,0 +1,43 @@
+#wheel {
+  animation: wheel 1s infinite linear;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+#plant {
+  animation: plant 1s ease-in-out infinite alternate;
+  transform-origin: top;
+}
+
+@keyframes wheel {
+  from {
+    transform: rotateZ(0deg);
+
+  }
+  to {
+    transform: rotateZ(360deg);
+
+  }
+}
+
+@keyframes plant{
+  from {
+    transform: rotateX(0deg);
+
+  }
+  to {
+    transform: rotateX(25deg);
+
+  }
+}
+
+.animation {
+  text-align: center;
+//   transform: translate(-50%, -50%);
+//   top: 50%;
+//   left: 50%;
+ margin-top: 50px;
+ margin-left: 40px;
+//
+}
+
