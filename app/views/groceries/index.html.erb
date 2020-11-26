@@ -2,29 +2,80 @@
   <h1 class="p-2 text-center">Grocery list</h1>
 </div>
 
-
-<div class="store-card p-2 m-2 shadow-sm" style="background-color: white ">
-  <h2>Store name</h2>
-   <% @groceries.each do |grocery| %>
-    <div class="main-card">
-      <img class="product-img" src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80" alt="">
-      <div class="product-info">
-        <div class="product-details">
-          <p class="product-name"><%= grocery.store_product.product.name %></p>
-          <p class="store-name">
-            <select class="edit-box">
-              <option>Rewe</option>
-              <option>Aldi</option>
-              <option>Lidl</option>
-              <option selected>Edeka</option>
-            </select>
-        </p>
+<% if @aldi.length > 0 %>
+  <div class="store-card p-2 m-2 shadow-sm" style="background-color: white ">
+    <h2>Aldi</h2>
+    <% @aldi.each do |grocery| %>
+      <div class="main-card">
+        <img class="product-img" src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80" alt="">
+        <div class="product-info">
+          <div class="product-details">
+            <p class="product-name"><%= grocery.store_product.product.name %></p>
+            <p class="store-name">
+              <select class="edit-box">
+                <option>Rewe</option>
+                <option>Aldi</option>
+                <option>Lidl</option>
+                <option selected>EdEka</option>
+              </select>
+          </p>
+          </div>
+          <%= image_tag "nutriscore-a.svg" %>
+          <i class="fas fa-shopping-basket fa-2x"></i>
         </div>
-        <%= image_tag "nutriscore-a.svg" %>
-        <i class="fas fa-shopping-basket fa-2x"></i>
       </div>
-    </div>
-  <% end %>
-</div>
+    <% end %>
+  </div>
+<% end %>
+<% if @rewe.length > 0 %>
+  <div class="store-card p-2 m-2 shadow-sm" style="background-color: white ">
+    <h2>Rewe</h2>
+    <% @rewe.each do |grocery| %>
+      <div class="main-card">
+        <img class="product-img" src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80" alt="">
+        <div class="product-info">
+          <div class="product-details">
+            <p class="product-name"><%= grocery.store_product.product.name %></p>
+            <p class="store-name">
+              <select class="edit-box">
+                <option>Rewe</option>
+                <option>Aldi</option>
+                <option>Lidl</option>
+                <option selected>Edeka</option>
+              </select>
+          </p>
+          </div>
+          <%= image_tag "nutriscore-a.svg" %>
+          <i class="fas fa-shopping-basket fa-2x"></i>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+<% if @edeka.length > 0 %>
+  <div class="store-card p-2 m-2 shadow-sm" style="background-color: white ">
+    <h2>Edeka</h2>
+    <% @edeka.each do |grocery| %>
+      <div class="main-card">
+        <img class="product-img" src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80" alt="">
+        <div class="product-info">
+          <div class="product-details">
+            <p class="product-name"><%= grocery.store_product.product.name %></p>
+            <p class="store-name">
+              <select class="edit-box">
+                <option>Rewe</option>
+                <option>Aldi</option>
+                <option>Lidl</option>
+                <option selected>Edeka</option>
+              </select>
+          </p>
+          </div>
+          <%= image_tag "nutriscore-a.svg" %>
+          <i class="fas fa-shopping-basket fa-2x"></i>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
 
 <input type="number" value="50" min="0" max="100" step="1"/>
