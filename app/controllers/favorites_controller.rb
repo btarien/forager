@@ -7,4 +7,9 @@ class FavoritesController < ApplicationController
     @favorite = Favorite.create(user: current_user, product_id: params[:product_id])
   end
 
+  def destroy
+    Favorite.find(params[:id]).destroy
+    redirect_to favorites_path
+  end
+
 end

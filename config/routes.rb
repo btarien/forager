@@ -3,5 +3,5 @@ Rails.application.routes.draw do
   root to: 'pages#home'
   resources :products, only: [:index, :show]
   resources :groceries, only: [:index, :create, :update, :destroy]
-  resources :favorites, only: [:index, :create]
+  resources :favorites, only: [:index, :create, :destroy]
 end

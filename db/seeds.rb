@@ -182,6 +182,7 @@ Grocery.create!(quantity: 1, user: User.first, store_product: StoreProduct.secon
 Grocery.create!(quantity: 6, user: User.first, store_product: StoreProduct.third)
 
 Favorite.create!(product: Product.first, user: User.first)
+Favorite.create!(product: Product.second, user: User.first)
 # Favorite.create!(product: Product.first, user: User.first)
 # Favorite.create!(product: Product.first, user: User.first)
 # Favorite.create!(product: Product.first, user: User.first)
