@@ -1,18 +1,11 @@
 <div id="map"
      style="width: 414px; height: 275px;"
      data-markers="<%= @markers.to_json %>"
-     data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"></div>
-     
-  <!-- <div class="search-box">
-          <input type="text" name="name" class="search-txt" placeholder="Find your healthy product" />
-          <a class="search-btn" href="#">
-          <i class="fa fa-search" aria-hidden="true"></i>
-          </a>
-      </div> -->
+     data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
+</div>
 
-<% @hash.each do |product, store_array| %>
-
-  <div class="main-card">
+<% @hash.each do | product, store_array | %>
+  <div class="main-card" data-toggle="modal" data-target="#product-info-<%= product.id %>">
     <img class="product-img" src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80" alt="">
     <div class="product-info">
       <div class="product-details">
@@ -24,15 +17,95 @@
               <%= button_tag type: 'submit', class: "button postfix" do %>
                 <i class="fas fa-shopping-basket fa-2x" aria-hidden="true"></i>
               <% end %>
-          <% end %> 
-          
-
+          <% end %>
       </div>
       <%= image_tag "nutriscore-a.svg" %>
     </div>
   </div>
-  <% end %>
-  
 
-   
-
+  <!-- Modal -->
+  <div class="modal fade" id="product-info-<%= product.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content p-3">
+        <div class="modal-header row">
+          <div class="back">
+            <i class="fas fa-arrow-left" data-dismiss="modal"></i>
+          </div>
+          <div class="options">
+            <i class="far fa-heart m-2"></i>
+            <i class="fas fa-shopping-basket m-2"></i>
+          </div>
+        </div>
+        <div class="modal-body">
+          <div class="row border-bottom d-flex justify-content-between">
+            <div class="col-10">
+              <h1 class="modal-title"><%= product.name %></h1>
+              <h2><%= product.brand %></h2>
+            </div>
+            <div class="d-flex align-items-center col-2">
+              <h1><%= product.nutriscore %></h1>
+            </div>
+          </div>
+          <div class="row justify-content-between my-5 mx-2">
+            <% nutrition = JSON.parse(product.nutrition, symbolize_names: true) %>
+            <div class="text-center d-flex flex-column justify-content-center">
+              <!-- <ul class="chart-skills">
+                <li><span></span></li>
+                <li><span></span></li>
+                <li><span></span></li>
+              </ul> -->
+              <h3 class="m-0" style="line-height: 1em;"><%= nutrition[:calories] %></h3>
+              <p class="m-0" style="line-height: 1em;">cal</p>
+            </div>
+            <div class="text-center">
+              <p class="m-0" style="color: blue; line-height: 1em"><%= ((nutrition[:carbohydrates][:total] * 4).fdiv(nutrition[:calories]) * 100).round %>%</p>
+              <h3 class="m-0" style="line-height: 1em;"><%= nutrition[:carbohydrates][:total] %> g</h3>
+              <p class="m-0" style="line-height: 1em">carbs</p>
+            </div>
+            <div class="text-center">
+              <p class="m-0" style="color: red; line-height: 1em;"><%= ((nutrition[:fat][:total] * 4).fdiv(nutrition[:calories]) * 100).round %>%</p>
+              <h3 class="m-0" style="line-height: 1em;"><%= nutrition[:fat][:total] %> g</h3>
+              <p class="m-0" style="line-height: 1em;">fat</p>
+            </div>
+            <div class="text-center">
+              <p class="m-0" style="color: purple; line-height: 1em;"><%= ((nutrition[:protein] * 4).fdiv(nutrition[:calories]) * 100).round %>%</p>
+              <h3 class="m-0" style="line-height: 1em;"><%= nutrition[:protein]%> g</h3>
+              <p class="m-0" style="line-height: 1em;">protein</p>
+            </div>
+          </div>
+          <div class="row justify-content-between bg-light p-2">
+            <h3>Nutrition Facts</h3>
+            <h3>per 100g</h3>
+          </div>
+          <% nutrition.each do |nutrient, value| %>
+              <% if value.class == Hash %>
+                <div class="row justify-content-between px-2">
+                  <h4><%= nutrient.capitalize %></h4>
+                  <h4><%= value.values.first %> g</h4>
+                </div>
+                <% value.except(:total).each do |subnutrient, grams| %>
+                  <div class="row justify-content-between ml-1 px-2">
+                    <h4 class="font-weight-light"><%= subnutrient.capitalize %></h4>
+                    <% if grams.nil? %>
+                      <h4 class="font-weight-light">-</h4>
+                    <% else %>
+                      <h4 class="font-weight-light"><%= grams %> g</h4>
+                    <% end %>
+                  </div>
+                <% end %>
+              <% else %>
+                <div class="row justify-content-between px-2">
+                  <h4><%= nutrient.capitalize %></h4>
+                  <h4><%= value %> g</h4>
+                </div>
+              <% end %>
+          <% end %>
+          <div class="row mt-3">
+            <h3>Ingredients</h3>
+            <p class="p-2"><%= product.ingredients %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
