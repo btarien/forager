@@ -1,18 +1,18 @@
 .navbar-lewagon {
   justify-content: space-between;
   background: white;
-  position: fixed;
-  top: 0;
+  position: sticky;
   width: 100%;
+  top: 0;
   z-index: 2;
-  height: 60px;
+  height: 55px;
 }
 
 .navbar-lewagon .navbar-collapse {
   flex-grow: 0;
 }
 
-.navbar-user-icon img {
+.navbar-lewagon .navbar-user-icon img {
   width: 40px;
   border-radius: 50%;
 }

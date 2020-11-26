@@ -1,21 +1,21 @@
 <div id="map"
-     style="width: 100%; height: calc(40vh - 60px); position: fixed; top: 60px; z-index: 1;"
+     style="width: 100%; height: calc(40vh); position: fixed; top: 55px; z-index: 1;"
      data-markers="<%= @markers.to_json %>"
      data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
 </div>
 
 <div class="container" style="background: white; margin-top: 40vh;">
   <% @hash.each do | product, store_array | %>
-  <div class="row d-flex align-items-center">
-    <img class="product-img" src="<%= product.product_img %>" alt=""  data-toggle="modal" data-target="#product-info-<%= product.id %>">
-    <div class="m-2 col-5">
-      <h3><%= product.name %></h3>
+  <div class="row d-flex align-items-center justify-content-between p-2 border-bottom">
+    <img class="product-img" src="<%= product.product_img %>" alt="" data-toggle="modal" data-target="#product-info-<%= product.id %>">
+    <div class="col-4 p-0">
+      <h3 class="m-0 p-0"><%= product.name %></h3>
       <%= simple_form_for :@grocery, url: groceries_path do |f| %>
         <%= f.input :store_id, label: false, collection: store_array, input_html: {style: "width: 100px;"}%>
         <%= f.input :product_id, as: :hidden, input_html: {value: product.id} %>
         <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
     </div>
-    <%= image_tag product.nutriscore_img, class: "nutriscore-img m-2" %>
+    <%= image_tag product.nutriscore_img, class: "nutriscore-img" %>
         <%= button_tag type: 'submit', class: "button postfix" do %>
           <i class="fas fa-shopping-basket fa-2x" aria-hidden="true"></i>
         <% end %>
