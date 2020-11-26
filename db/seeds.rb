@@ -33,7 +33,9 @@ Product.create!(name: 'Skyr Style Mango',
     protein: 5.2,
     sodium: 0.26
   }.to_json,
-  ingredients: "Soy base (water, peeled soy beans (13.9%)), sugar, mango (5%), passion fruit juice from fruit juice concentrate, stabilizer (pectins), acid regulators (sodium citrate, citric acid), tricalcium phosphate, sea salt, antioxidants (extracts with a high tocopherol content, fatty acid esters Ascorbic acid), flavors, vitamins (B2, B12, D2), yoghurt cultures (Str. Thermophilus, L. bulgaricus)."
+  ingredients: "Soy base (water, peeled soy beans (13.9%)), sugar, mango (5%), passion fruit juice from fruit juice concentrate, stabilizer (pectins), acid regulators (sodium citrate, citric acid), tricalcium phosphate, sea salt, antioxidants (extracts with a high tocopherol content, fatty acid esters Ascorbic acid), flavors, vitamins (B2, B12, D2), yoghurt cultures (Str. Thermophilus, L. bulgaricus).",
+  nutriscore_img: 'nutriscore-a.svg',
+  product_img: 'https://img.rewe-static.de/8289224/29456684_digital-image.png'
 )
 Product.create!(name: 'Philadelphia Original',
   brand: 'Philadelphia',
@@ -55,7 +57,9 @@ Product.create!(name: 'Philadelphia Original',
     protein: 5.4,
     sodium: 0.75
   }.to_json,
-  ingredients: "full fat soft cheese , salt, stabiliser (locust bean gum), acid (citric acid)"
+  ingredients: "full fat soft cheese , salt, stabiliser (locust bean gum), acid (citric acid)",
+  nutriscore_img: 'nutriscore-d.svg',
+  product_img: 'https://img.rewe-static.de/0575043/770460_digital-image.png'
 )
 Product.create!(name: 'Flatbreads everything good grains crackers',
   brand: 'Paskesz',
@@ -77,7 +81,9 @@ Product.create!(name: 'Flatbreads everything good grains crackers',
     protein: 5.4,
     sodium: 0.7
   }.to_json,
-  ingredients: "Wheat flour, sesame seeds, extra virgin olive oil, onion powder, garlic powder, poppy seeds, water, salt, caraway seeds."
+  ingredients: "Wheat flour, sesame seeds, extra virgin olive oil, onion powder, garlic powder, poppy seeds, water, salt, caraway seeds.",
+  nutriscore_img: 'nutriscore-d.svg',
+  product_img: 'https://storage.googleapis.com/sp-public/items/large/231799.jpg?v=5'
 )
 
 Product.create!(name: 'Red Bull',
@@ -100,7 +106,9 @@ Product.create!(name: 'Red Bull',
     protein: 0,
     sodium: 0.04
   }.to_json,
-  ingredients: "water, sucrose, glucose, acidity regulators (sodium citrates, magnesium carbionate), carbon dioxide, acidifier (citric acid), taurine 0,4%, caffeine 0,03%, inositol, vitamins (niacin, pantothenic acid, vitamin b6, vitamin b12), flavourings, colours (caramel, riboflavin)"
+  ingredients: "water, sucrose, glucose, acidity regulators (sodium citrates, magnesium carbionate), carbon dioxide, acidifier (citric acid), taurine 0,4%, caffeine 0,03%, inositol, vitamins (niacin, pantothenic acid, vitamin b6, vitamin b12), flavourings, colours (caramel, riboflavin)",
+  nutriscore_img: 'nutriscore-e.svg',
+  product_img: 'https://img.rewe-static.de/2201429/3209700_digital-image.png'
 )
 
 Product.create!(name: 'PB2 The Original Powdered Peanut Butter',
@@ -123,7 +131,9 @@ Product.create!(name: 'PB2 The Original Powdered Peanut Butter',
     protein: 46.15,
     sodium: 2.76
   }.to_json,
-  ingredients: "Roasted peanuts, sugar and salt."
+  ingredients: "Roasted peanuts, sugar and salt.",
+  nutriscore_img: 'nutriscore-d.svg',
+  product_img: 'https://images-na.ssl-images-amazon.com/images/I/71HX9pfFixL._SY445_.jpg'
 )
 
 Product.create!(name: 'Organic Black Beans',
@@ -146,7 +156,9 @@ Product.create!(name: 'Organic Black Beans',
     protein: 5.38,
     sodium: 0.108
   }.to_json,
-  ingredients: "Organic black beans, water, sea salt."
+  ingredients: "Organic black beans, water, sea salt.",
+  nutriscore_img: 'nutriscore-a.svg',
+  product_img: 'https://i.pinimg.com/originals/90/6d/72/906d7253e3608c456f9e0f8c2b9bf859.jpg'
 )
 
 puts 'creating stores...'
@@ -168,5 +180,28 @@ StoreProduct.create!(price: 0.5, product: Product.last, store: Store.first)
 Grocery.create!(quantity: 2, user: User.first, store_product: StoreProduct.first)
 Grocery.create!(quantity: 1, user: User.first, store_product: StoreProduct.second)
 Grocery.create!(quantity: 6, user: User.first, store_product: StoreProduct.third)
+
+Favorite.create!(product: Product.first, user: User.first)
+# Favorite.create!(product: Product.first, user: User.first)
+# Favorite.create!(product: Product.first, user: User.first)
+# Favorite.create!(product: Product.first, user: User.first)
+# Favorite.create!(product: Product.first, user: User.first)
+
+# product: Product.first, user: User.first)
+
+
+# t.bigint "product_id", null: false
+#     t.bigint "user_id", null: false
+#     t.datetime "created_at", precision: 6, null: false
+#     t.datetime "updated_at", precision: 6, null: false
+#     t.index ["product_id"], name: "index_favorites_on_product_id"
+#     t.index ["user_id"], name: "index_favorites_on_user_id"
+
+
+
+
+
+
+
 
 
