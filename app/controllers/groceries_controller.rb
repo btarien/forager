@@ -32,8 +32,14 @@ class GroceriesController < ApplicationController
     grocery_params = groceries_params
     strproduct = StoreProduct.find_by(product_id: grocery_params[:product_id], store_id: grocery_params[:store_id])
     Grocery.find(grocery_params[:grocery_id]).update!(store_product: strproduct)
+    redirect_to groceries_path
   end
-  
+
+  def destroy
+    gro_to_delete = Grocery.find(params[:id]).destroy
+    
+    redirect_to groceries_path
+  end
   private
   
   def groceries_params
