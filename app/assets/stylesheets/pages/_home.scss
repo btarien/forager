@@ -1,1 +1,16 @@
 // Specific CSS for your home-page
+html,
+body {
+    height: 80%;
+}
+
+.home-container {
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search_bar {
+  display: flex;
+}
