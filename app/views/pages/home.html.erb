@@ -1,14 +1,13 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
-
-
-<div class="search-bar-bar form-inline">
-        <%= form_tag products_path, method: :get do %>
-          <%= text_field_tag :address,
-            params[:address],
-            class: "form-control",
-            placeholder: "Where are you going?"
-          %>
-          <%= submit_tag "Search", class: "btn btn-primary ml-4" %>
-        <% end %>
+<div class="home-container">
+  <div class="search-bar-navi">
+    <%= form_tag products_path, method: :get, :class=>"search_bar" do %>
+      <%= text_field_tag :address,
+        params[:address],
+        placeholder: "Where are you going?",
+        class: "address-search form-control mr-sm-2"%>
+      <div class="input-group-btn ml-3">
+        <%= submit_tag "Search", class: "btn btn-primary " %>
       </div>
+    <% end %>
+  </div>
+</div>
