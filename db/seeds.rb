@@ -181,4 +181,27 @@ Grocery.create!(quantity: 2, user: User.first, store_product: StoreProduct.first
 Grocery.create!(quantity: 1, user: User.first, store_product: StoreProduct.second)
 Grocery.create!(quantity: 6, user: User.first, store_product: StoreProduct.third)
 
+Favorite.create!(product: Product.first, user: User.first)
+# Favorite.create!(product: Product.first, user: User.first)
+# Favorite.create!(product: Product.first, user: User.first)
+# Favorite.create!(product: Product.first, user: User.first)
+# Favorite.create!(product: Product.first, user: User.first)
+
+# product: Product.first, user: User.first)
+
+
+# t.bigint "product_id", null: false
+#     t.bigint "user_id", null: false
+#     t.datetime "created_at", precision: 6, null: false
+#     t.datetime "updated_at", precision: 6, null: false
+#     t.index ["product_id"], name: "index_favorites_on_product_id"
+#     t.index ["user_id"], name: "index_favorites_on_user_id"
+
+
+
+
+
+
+
+
 

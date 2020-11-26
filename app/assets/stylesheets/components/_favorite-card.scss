@@ -1,0 +1,25 @@
+.favorite-card {
+  /*overflow: hidden;*/
+  display: flex;
+  align-items: center;
+  // margin: 0px;
+/*  border: 1px solid red;
+*/}
+
+.product-img {
+  object-fit: cover;
+  width: 75px;
+  height: 75px;
+  border-radius: 5px;
+}
+
+// .main-card .favorite-info {
+//   padding: 16px;
+// }
+.favorite-name {
+  font-size: 20px;
+  margin: 0px;
+  margin-left: 40px;
+}
+
+
