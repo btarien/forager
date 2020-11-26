@@ -5,14 +5,14 @@
 </div>
 
 <% @hash.each do | product, store_array | %>
-  <div class="main-card" data-toggle="modal" data-target="#product-info-<%= product.id %>">
-    <img class="product-img" src="<%= product.product_img %>" alt="">
+  <div class="main-card">
+    <img class="product-img" src="<%= product.product_img %>" alt=""  data-toggle="modal" data-target="#product-info-<%= product.id %>">
     <div class="product-info">
       <div class="product-details">
         <p class="product-name"><%= product.name %></p>
           <%= simple_form_for :@grocery, url: groceries_path do |f| %>
-              <%= f.input :store_id, :collection => store_array %>
-              <%= f.input :product_id, as: :hidden, :input_html => {value: product.id} %>
+              <%= f.input :store_id, collection: store_array %>
+              <%= f.input :product_id, as: :hidden, input_html: {value: product.id} %>
               <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
               <%= button_tag type: 'submit', class: "button postfix" do %>
                 <i class="fas fa-shopping-basket fa-2x" aria-hidden="true"></i>
