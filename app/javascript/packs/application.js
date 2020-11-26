@@ -26,6 +26,8 @@ require("channels")
 import "bootstrap";
 import { initMapbox } from '../plugins/init_mapbox';
 import { initSwiping } from '../plugins/init_swiping';
+import { initAutocomplete } from '../plugins/init_autocomplete';
+
 
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
@@ -35,4 +37,5 @@ document.addEventListener('turbolinks:load', () => {
   // initSelect2();
   initMapbox();
   initSwiping();
+  initAutocomplete();
 });
