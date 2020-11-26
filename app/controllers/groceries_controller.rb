@@ -29,14 +29,14 @@ class GroceriesController < ApplicationController
     #end
   end
   def update
-    grocery_params = params["grocery"]
-    current_store = StoreProduct.where(product_id: grocery_params[:product_id].to_i).find_by(store_id: grocery_params[:current_store_id].to_i)
-    current_store.update(in_grocery: false)
-    new_store_product = StoreProduct.create!(product_id: grocery_params[:product_id].to_i, store_id: grocery_params[:store_id].to_i)
-    @grocery = Grocery.create(
-        user: current_user,
-        store_product: new_store_product,
-        quantity: 1
-      )
+    grocery_params = groceries_params
+    strproduct = StoreProduct.find_by(product_id: grocery_params[:product_id], store_id: grocery_params[:store_id])
+    Grocery.find(grocery_params[:grocery_id]).update!(store_product: strproduct)
+  end
+  
+  private
+  
+  def groceries_params
+    params.require(:grocery).permit(:store_id, :product_id, :current_store_id, :grocery_id)
   end
 end
