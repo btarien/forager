@@ -42,6 +42,8 @@ ActiveRecord::Schema.define(version: 2020_11_26_112908) do
     t.datetime "updated_at", precision: 6, null: false
     t.json "nutrition"
     t.string "ingredients"
+    t.string "nutriscore_img"
+    t.string "product_img"
   end
 
   create_table "store_products", force: :cascade do |t|
