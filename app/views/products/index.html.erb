@@ -1,26 +1,33 @@
 <div id="map"
-     style="width: 414px; height: 275px;"
+     style="width: 100%; height: calc(40vh - 55px); position: fixed; top: 55px; z-index: 1;"
      data-markers="<%= @markers.to_json %>"
      data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
 </div>
 
-<% @hash.each do | product, store_array | %>
-  <div class="main-card">
-    <img class="product-img" src="<%= product.product_img %>" alt=""  data-toggle="modal" data-target="#product-info-<%= product.id %>">
-    <div class="product-info">
-      <div class="product-details">
-        <p class="product-name"><%= product.name %></p>
-          <%= simple_form_for :@grocery, url: groceries_path do |f| %>
-              <%= f.input :store_id, collection: store_array %>
-              <%= f.input :product_id, as: :hidden, input_html: {value: product.id} %>
-              <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-              <%= button_tag type: 'submit', class: "button postfix" do %>
-                <i class="fas fa-shopping-basket fa-2x" aria-hidden="true"></i>
-              <% end %>
-          <% end %>
-      </div>
-      <%= image_tag product.nutriscore_img %>
+<div class="container" style="background: white; margin-top: 40vh;">
+  <% @hash.each do | product, store_array | %>
+  <div class="row d-flex align-items-center justify-content-between p-2 border-bottom">
+    <img class="product-img" src="<%= product.product_img %>" alt="" data-toggle="modal" data-target="#product-info-<%= product.id %>">
+    <div class="col-4">
+      <h3><%= product.name %></h3>
+      <% if @all_groceries.any? {|gro| gro.product == product } %>
     </div>
+    <%= image_tag product.nutriscore_img, class: "nutriscore-img" %>
+    <%= link_to grocery_path(Grocery.find_by(store_product: StoreProduct.find_by(product: product))), method: :delete do %>
+      <i class="far fa-trash-alt"></i>
+    <% end %>
+      <% else %>
+      <%= simple_form_for :@grocery, url: groceries_path do |f| %>
+        <%= f.input :store_id, label: false, collection: store_array, input_html: {style: "width: 100px;"}%>
+        <%= f.input :product_id, as: :hidden, input_html: {value: product.id} %>
+        <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
+    </div>
+    <%= image_tag product.nutriscore_img, class: "nutriscore-img" %>
+        <%= button_tag type: 'submit', class: "button postfix" do %>
+          <i class="fas fa-shopping-basket" aria-hidden="true"></i>
+        <% end %>
+      <% end %>
+    <% end %>
   </div>
 
   <!-- Modal -->
@@ -108,4 +115,5 @@
       </div>
     </div>
   </div>
-<% end %>
+  <% end %>
+</div>

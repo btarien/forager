@@ -1,3 +1,9 @@
+.nutriscore-img {
+  width: 75px;
+  height: 40px;
+  object-fit: cover;
+}
+
 .main-card {
   /*overflow: hidden;*/
   display: flex;
@@ -45,7 +51,3 @@
 .fa-shopping-basket:hover {
   color: #6f9b52;
 }
-
-
-
-

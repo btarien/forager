@@ -2,6 +2,7 @@ class ProductsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index]
 
   def index
+    @all_groceries = Grocery.where(user: current_user)
     @grocery = Grocery.new
     @store_products = StoreProduct.all
     @stores = Store.all
