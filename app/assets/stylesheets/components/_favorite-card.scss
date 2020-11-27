@@ -41,7 +41,15 @@
 }
 
 .red-box {
- background: red;
+ background: $red;
  width: 100%;
  height: 75px;
+ text-align: center;
+ padding-top: 15px;
+}
+
+.novaklasa {
+  color: white;
+  font-size: 40px;
+
 }

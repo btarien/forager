@@ -7,7 +7,7 @@ class GroceriesController < ApplicationController
       product = grocery.store_product.product
       shops = product.stores
       @stores << {product: grocery, store: shops}
-  
+
     end
   end
 
@@ -21,7 +21,7 @@ class GroceriesController < ApplicationController
         quantity: 1
       )
 
-      
+
    # else
      # grocery = Grocery.where(user: current_user, store_product: StoreProduct.find(params[:store_product_id])).last
     #  quantity = grocery.quantity + 1
@@ -37,11 +37,11 @@ class GroceriesController < ApplicationController
 
   def destroy
     gro_to_delete = Grocery.find(params[:id]).destroy
-    
+
     redirect_to groceries_path
   end
   private
-  
+
   def groceries_params
     params.require(:grocery).permit(:store_id, :product_id, :current_store_id, :grocery_id)
   end
