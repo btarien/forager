@@ -19,7 +19,7 @@
     <% end %>
       <% else %>
       <%= simple_form_for :@grocery, url: groceries_path do |f| %>
-        <%= f.input :store_id, label: false, collection: store_array, input_html: {style: "width: 100px;"}%>
+        <%= f.input :store_id, label: false, collection: store_array, include_blank: false, input_html: {style: "width: 100px;"}%>
         <%= f.input :product_id, as: :hidden, input_html: {value: product.id} %>
         <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
     </div>
