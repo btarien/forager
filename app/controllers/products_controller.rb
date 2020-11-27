@@ -2,9 +2,9 @@ class ProductsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index]
 
   def index
-
     address = params[:address]
-    if results = Geocoder.search(address).present?
+    results = Geocoder.search(address)
+    if results.present?
       @coordinates = results.first.coordinates
     else
       flash.alert = "Please enter an address."
