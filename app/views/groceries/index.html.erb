@@ -9,21 +9,33 @@
     <% @groceries.each do |grocery| %>
       <% new_product_array = @stores.select { |store_hash| store_hash[:product].product == grocery.product} %>
       <% new_store_array = new_product_array.map { |product| product[:store]}.flatten.uniq %>
+
       <% if grocery.store.name == store %>
-        <div class="row d-flex align-items-center justify-content-between p-2 border-bottom">
-          <img class="product-img" src="<%= grocery.product.product_img %>" alt=""  data-toggle="modal" data-target="#product-info-<%= grocery.product.id %>">
-          <div class="col-4">
-            <h3><%= grocery.product.name %></h3>
-            <%= simple_form_for :grocery, url: grocery_path(grocery), method: :patch do |f| %>
-              <%= f.input :store_id, label: false, collection: new_store_array, input_html: { class: 'form-control', onchange: 'this.form.submit()' } %>
-              <%= f.input :product_id, as: :hidden, input_html: {value: grocery.product.id} %>
-              <%= f.input :current_store_id, as: :hidden, input_html: {value: grocery.store.id} %>
-              <%= f.input :grocery_id, as: :hidden, input_html: {value: grocery.id}  %>
-              <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-            <% end %>
+        <div class="swiper-container favorite-card">
+          <div class="swiper-wrapper">
+            
+              <div class="swiper-slide">
+                <div class="red-box">
+                  <%= link_to "", grocery_path(grocery), method: :delete, class: "action far fa-trash-alt fa-2x text-danger"%>
+                </div>
+              </div>
+              <div class="swiper-slide border-bottom p-2 d-flex align-items-center justify-content-between">
+                <img class="product-img" src="<%= grocery.product.product_img %>" alt=""  data-toggle="modal" data-target="#product-info-<%= grocery.product.id %>">
+                <div class="col-4">
+                  <h3><%= grocery.product.name %></h3>
+                  <%= simple_form_for :grocery, url: grocery_path(grocery), method: :patch do |f| %>
+                    <%= f.input :store_id, label: false, collection: new_store_array, input_html: { class: 'form-control', onchange: 'this.form.submit()' } %>
+                    <%= f.input :product_id, as: :hidden, input_html: {value: grocery.product.id} %>
+                    <%= f.input :current_store_id, as: :hidden, input_html: {value: grocery.store.id} %>
+                    <%= f.input :grocery_id, as: :hidden, input_html: {value: grocery.id}  %>
+                    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+                  <% end %>
+                </div>
+                <%= image_tag grocery.product.nutriscore_img, class: "nutriscore-img" %>
+    
+              </div>
+            
           </div>
-          <%= image_tag grocery.product.nutriscore_img, class: "nutriscore-img" %>
-          <%= link_to "", grocery_path(grocery), method: :delete, class: "far fa-trash-alt fa-2x text-danger"%>
         </div>
       <% end %>
 

@@ -24,7 +24,7 @@
         <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
     </div>
     <%= image_tag product.nutriscore_img, class: "nutriscore-img" %>
-        <%= button_tag type: 'submit', class: "button postfix" do %>
+        <%= button_tag type: 'submit', class: "button postfix", data: { disable_with: "" } do %>
           <i class="fas fa-shopping-basket" aria-hidden="true"></i>
         <% end %>
       <% end %>
