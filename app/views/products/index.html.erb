@@ -15,7 +15,7 @@
     </div>
     <%= image_tag product.nutriscore_img, class: "nutriscore-img" %>
     <%= link_to grocery_path(Grocery.find_by(store_product: StoreProduct.find_by(product: product))), method: :delete do %>
-      <i class="far fa-trash-alt"></i>
+      <i class="far fa-trash-alt fa-2x text-danger"></i>
     <% end %>
       <% else %>
       <%= simple_form_for :@grocery, url: groceries_path do |f| %>
