@@ -7,15 +7,17 @@ class GroceriesController < ApplicationController
       product = grocery.store_product.product
       shops = product.stores
       @stores << {product: grocery, store: shops}
+
     end
   end
 
   def create
     grocery_params = params["@grocery"]
+
     #if @grocery.nil?
-      @grocery = Grocery.create!(
+      @grocery = Grocery.create(
         user: current_user,
-        store_product: StoreProduct.find_by(product: grocery_params[:product_id]),
+        store_product: StoreProduct.where(product_id: grocery_params[:product_id].to_i).find_by(store_id: grocery_params[:store_id].to_i),
         quantity: 1
       )
 
@@ -34,7 +36,8 @@ class GroceriesController < ApplicationController
   end
 
   def destroy
-    Grocery.find(params[:id]).destroy
+    gro_to_delete = Grocery.find(params[:id]).destroy
+
     redirect_to groceries_path
   end
   private
