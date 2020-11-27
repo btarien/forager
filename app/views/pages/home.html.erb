@@ -3,7 +3,7 @@
 </div>
 <div class="home-container">
   <div class="search-bar-navi">
-    <%= form_tag products_path, method: :get, :class=>"search_bar" do %>
+    <%= form_tag products_path, method: :get, :class=>"search_bar " do %>
       <%= text_field_tag :address,
         params[:address],
         placeholder: "Where are you going?",

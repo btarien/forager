@@ -4,8 +4,12 @@ class ProductsController < ApplicationController
   def index
 
     address = params[:address]
-    results = Geocoder.search(address)
-    @coordinates = results.first.coordinates
+    if results = Geocoder.search(address).present?
+      @coordinates = results.first.coordinates
+    else
+      flash.alert = "Please enter an address."
+      redirect_to root_path
+    end
     # convert address into latitude longitud
     # @coordinates = [address.longitude, address.latitude]
     # in the view, read these @coordinates
