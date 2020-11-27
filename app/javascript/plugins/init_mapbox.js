@@ -1,4 +1,5 @@
 import mapboxgl from 'mapbox-gl';
+
 const fitMapToMarkers = (map, markers) => {
   const bounds = new mapboxgl.LngLatBounds();
   markers.forEach(marker => bounds.extend([ marker.lng, marker.lat ]));
@@ -8,10 +9,13 @@ const initMapbox = () => {
   const mapElement = document.getElementById('map');
 
   if (mapElement) { // only build a map if there's a div#map to inject into
+    const coordinates = JSON.parse(mapElement.dataset.coordinates);
     mapboxgl.accessToken = mapElement.dataset.mapboxApiKey;
     const map = new mapboxgl.Map({
       container: 'map',
-      style: 'mapbox://styles/mapbox/streets-v10'
+      style: 'mapbox://styles/mapbox/streets-v10',
+      center: [coordinates[1],coordinates[0]], // starting position [lng, lat]
+      zoom: 12
     });
     const markers = JSON.parse(mapElement.dataset.markers);
   markers.forEach((marker) => {
@@ -21,7 +25,7 @@ const initMapbox = () => {
       .setPopup(popup)
       .addTo(map);
   });
-  fitMapToMarkers(map, markers);
+  //fitMapToMarkers(map, markers);
   }
 };
 
