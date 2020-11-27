@@ -1,9 +1,10 @@
-<div class="bg-success text-white">
+<div class="bg-success text-white" style="margin-top: 55px;">
   <h1 class="p-2 text-center">Grocery list</h1>
 </div>
 
+<div class="container bg-white" style="overflow: scroll;">
 <% @all_stores.each do |store| %>
-  <div class="store-card p-2 m-2 shadow-sm" style="background-color: white ">
+  <div class="store-card p-2 m-2 shadow-sm">
     <h2><%= store %></h2>
     <% @groceries.each do |grocery| %>
       <% new_product_array = @stores.select { |store_hash| store_hash[:product].product == grocery.product} %>
@@ -15,10 +16,10 @@
               <div class="product-details">
                 <p class="product-name"><%= grocery.product.name %></p>
                 <%= simple_form_for :grocery, url: grocery_path(grocery), method: "PATCH" do |f| %>
-                  <%= f.input :store_id, :collection => new_store_array  %>
-                  <%= f.input :product_id, as: :hidden, :input_html => {value: grocery.product.id} %>
-                  <%= f.input :current_store_id, as: :hidden, :input_html => {value: grocery.store.id} %>
-                  <%= f.input :grocery_id, as: :hidden, :input_html => {value: grocery.id}  %>
+                  <%= f.input :store_id, label: false, collection: new_store_array  %>
+                  <%= f.input :product_id, as: :hidden, input_html: {value: grocery.product.id} %>
+                  <%= f.input :current_store_id, as: :hidden, input_html: {value: grocery.store.id} %>
+                  <%= f.input :grocery_id, as: :hidden, input_html: {value: grocery.id}  %>
                   <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
                   <%= button_tag type: 'submit', class: "button postfix" do %>
                     <i class="fas fa-shopping-basket fa-2x" aria-hidden="true"></i>
@@ -117,8 +118,8 @@
   </div>
     <% end %>
     </div>
-
 <% end %>
+</div>
 
 <input type="number" value="50" min="0" max="100" step="1"/>
 
