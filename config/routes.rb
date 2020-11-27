@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   resources :products, only: [:index, :show]
   resources :groceries, only: [:index, :create, :update, :destroy]
   resources :favorites, only: [:index, :create, :destroy]
+
 end

@@ -10,6 +10,7 @@ class ProductsController < ApplicationController
     # @coordinates = [address.longitude, address.latitude]
     # in the view, read these @coordinates
     @all_groceries = Grocery.where(user: current_user)
+    @all_favorites = Favorite.where(user: current_user)
     @grocery = Grocery.new
     @store_products = StoreProduct.all
     @stores = Store.all

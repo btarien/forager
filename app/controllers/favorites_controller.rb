@@ -2,9 +2,8 @@ class FavoritesController < ApplicationController
   def index
     @favorites = Favorite.all
   end
-
   def create
-    @favorite = Favorite.create(user: current_user, product_id: params[:product_id])
+    @favorite = Favorite.create(user: current_user, product_id: params["@favorite"][:product_id].to_i)
   end
 
   def destroy
