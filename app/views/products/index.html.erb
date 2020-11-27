@@ -10,14 +10,18 @@
     <div class="product-info">
       <div class="product-details">
         <p class="product-name"><%= product.name %></p>
-          <%= simple_form_for :@grocery, url: groceries_path do |f| %>
-              <%= f.input :store_id, collection: store_array %>
-              <%= f.input :product_id, as: :hidden, input_html: {value: product.id} %>
-              <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-              <%= button_tag type: 'submit', class: "button postfix" do %>
-                <i class="fas fa-shopping-basket fa-2x" aria-hidden="true"></i>
-              <% end %>
-          <% end %>
+        <% if @all_groceries.any? {|gro| gro.product == product } %>
+           <p>Its already in the basket</p>
+        <% else %>
+            <%= simple_form_for :@grocery, url: groceries_path do |f| %>
+                <%= f.input :store_id, collection: store_array %>
+                <%= f.input :product_id, as: :hidden, input_html: {value: product.id} %>
+                <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+                <%= button_tag type: 'submit', class: "button postfix" do %>
+                  <i class="fas fa-shopping-basket fa-2x" aria-hidden="true"></i>
+                <% end %>
+            <% end %>
+        <% end %>
       </div>
       <%= image_tag product.nutriscore_img %>
     </div>
