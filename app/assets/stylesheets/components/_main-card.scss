@@ -1,16 +1,50 @@
-.product-img {
-  object-fit: cover;
-  width: 75px;
-  height: 75px;
-  border-radius: 5px;
-}
-
 .nutriscore-img {
   width: 75px;
   height: 40px;
   object-fit: cover;
 }
 
+.main-card {
+  /*overflow: hidden;*/
+  display: flex;
+  align-items: center;
+  margin: 0px;
+/*  border: 1px solid red;
+*/}
+.product-details {
+  width: 90px;
+}
+.product-img {
+  object-fit: cover;
+  width: 75px;
+  height: 75px;
+  border-radius: 5px;
+}
+.main-card .product-info {
+  padding: 16px;
+}
+.product-name {
+  font-size: 14px;
+  margin: 0px
+}
+.store-name {
+  font-size: 14px;
+  color: #696969;
+  margin: 0px;
+}
+.product-info {
+  display: flex;
+  align-items: center;
+}
+.product-info img {
+  width: 75px;
+  height: 40px;
+  object-fit: cover;
+  margin-left: 60px;
+}
+.product-info i {
+  margin-left: 30px;
+}
 .fa-shopping-basket {
   color: #97BB7F;
 }
