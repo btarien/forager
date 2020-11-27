@@ -2,6 +2,12 @@ class ProductsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index]
 
   def index
+    address = params[:address]
+    results = Geocoder.search(address)
+    @coordinates = results.first.coordinates
+    # convert address into latitude longitud
+    # @coordinates = [address.longitude, address.latitude]
+    # in the view, read these @coordinates
     @grocery = Grocery.new
     @store_products = StoreProduct.all
     @stores = Store.all
