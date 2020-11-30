@@ -33,17 +33,16 @@
           <i class="fas fa-arrow-left" data-dismiss="modal"></i>
         </div>
         <div class="options d-flex align-items-end">
-          <% unless all_favorites.any? {|favv| favv.product == product } %>
+          <% if all_favorites.any? {|favv| favv.product == product } %>
+            <i class='fa fa-heart m-2'></i>
+          <% else %>
             <%= simple_form_for :@favorite, url: favorites_path do |f| %>
               <%= f.input :product_id, as: :hidden, input_html: {value: product.id} %>
               <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
-              <%= button_tag type: 'submit', class: "button postfix border-0 bg-white", data: { disable_with: "" } do %>
-                <i class="far fa-heart"></i>
+              <%= button_tag type: 'submit', class: "button border-0 bg-white postfix", 'data-disable-with' => "<i class='fa fa-heart m-2'></i>" do %>
+                <i class="fa fa-heart-o m-2" aria-hidden="true"></i>
               <% end %>
             <% end %>
-          <% end %>
-          <%= link_to groceries_path do  %>
-            <i class="fas fa-shopping-basket"></i>
           <% end %>
         </div>
       </div>
