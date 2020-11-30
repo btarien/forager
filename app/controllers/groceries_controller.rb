@@ -20,12 +20,6 @@ class GroceriesController < ApplicationController
         quantity: 1
       )
 
-
-   # else
-     # grocery = Grocery.where(user: current_user, store_product: StoreProduct.find(params[:store_product_id])).last
-    #  quantity = grocery.quantity + 1
-    #  grocery.update(quantity: quantity)
-    #end
   end
   def update
     grocery_params = groceries_params
@@ -48,5 +42,5 @@ class GroceriesController < ApplicationController
   def gro_params_map_page
     params.require(:@grocery).permit(:store_id, :product_id)
   end
-
+  
 end
