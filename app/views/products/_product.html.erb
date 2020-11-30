@@ -1,0 +1,121 @@
+<div class="product-list row d-flex align-items-center justify-content-between p-2 border-bottom">
+  <%= simple_form_for :@grocery, url: groceries_path, remote: true, input_html: { class: "row d-flex align-items-center justify-content-between p-2 border-bottom" } do |f| %>
+    <div class="col-3">
+      <img class="product-img" src="<%= product.product_img %>" alt="" data-toggle="modal" data-target="#product-info-<%= product.id %>">
+    </div>
+    <div class="col-4">
+      <h3><%= product.name %></h3>
+      <%= f.input :store_id, label: false, collection: store_array, input_html: {style: "width: 100px;"}%>
+    </div>
+    <%= f.input :product_id, as: :hidden, input_html: {value: product.id} %>
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
+    <div class="col-3">
+      <%= image_tag product.nutriscore_img, class: "nutriscore-img" %>
+    </div>
+    <div id='button' data-product-id='<%= product.id %>' class="col-2">
+      <% if all_groceries.any? {|gro| gro.product == product } %>
+        <i class="fas fa-check text-success fa-2x"></i>
+      <% else %>
+        <%= button_tag type: 'submit', class: "button postfix border-0 bg-white" do %>
+          <i class="fas fa-shopping-basket fa-2x"></i>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="product-info-<%= product.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content p-3">
+      <div class="modal-header row">
+        <div class="back">
+          <i class="fas fa-arrow-left" data-dismiss="modal"></i>
+        </div>
+        <div class="options d-flex align-items-end">
+          <% unless all_favorites.any? {|favv| favv.product == product } %>
+            <%= simple_form_for :@favorite, url: favorites_path do |f| %>
+              <%= f.input :product_id, as: :hidden, input_html: {value: product.id} %>
+              <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
+              <%= button_tag type: 'submit', class: "button postfix border-0 bg-white", data: { disable_with: "" } do %>
+                <i class="far fa-heart"></i>
+              <% end %>
+            <% end %>
+          <% end %>
+          <%= link_to groceries_path do  %>
+            <i class="fas fa-shopping-basket"></i>
+          <% end %>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="row border-bottom d-flex justify-content-between">
+          <div class="col-8">
+            <h1 class="modal-title"><%= product.name %></h1>
+            <h2><%= product.brand %></h2>
+          </div>
+          <div class="col-4">
+            <%= image_tag product.nutriscore_img, size: "100x50"%>
+          </div>
+        </div>
+        <div class="row justify-content-between my-5 mx-2">
+          <% nutrition = JSON.parse(product.nutrition, symbolize_names: true) %>
+          <div class="text-center d-flex flex-column justify-content-center">
+            <!-- <ul class="chart-skills">
+              <li><span></span></li>
+              <li><span></span></li>
+              <li><span></span></li>
+            </ul> -->
+            <h3 class="m-0" style="line-height: 1em;"><%= nutrition[:calories] %></h3>
+            <p class="m-0" style="line-height: 1em;">cal</p>
+          </div>
+          <div class="text-center">
+            <p class="m-0" style="color: blue; line-height: 1em"><%= ((nutrition[:carbohydrates][:total] * 4).fdiv(nutrition[:calories]) * 100).round %>%</p>
+            <h3 class="m-0" style="line-height: 1em;"><%= nutrition[:carbohydrates][:total] %> g</h3>
+            <p class="m-0" style="line-height: 1em">carbs</p>
+          </div>
+          <div class="text-center">
+            <p class="m-0" style="color: red; line-height: 1em;"><%= ((nutrition[:fat][:total] * 4).fdiv(nutrition[:calories]) * 100).round %>%</p>
+            <h3 class="m-0" style="line-height: 1em;"><%= nutrition[:fat][:total] %> g</h3>
+            <p class="m-0" style="line-height: 1em;">fat</p>
+          </div>
+          <div class="text-center">
+            <p class="m-0" style="color: purple; line-height: 1em;"><%= ((nutrition[:protein] * 4).fdiv(nutrition[:calories]) * 100).round %>%</p>
+            <h3 class="m-0" style="line-height: 1em;"><%= nutrition[:protein]%> g</h3>
+            <p class="m-0" style="line-height: 1em;">protein</p>
+          </div>
+        </div>
+        <div class="row justify-content-between bg-light p-2">
+          <h3>Nutrition Facts</h3>
+          <h3>per 100g</h3>
+        </div>
+        <% nutrition.each do |nutrient, value| %>
+            <% if value.class == Hash %>
+              <div class="row justify-content-between px-2">
+                <h4><%= nutrient.capitalize %></h4>
+                <h4><%= value.values.first %> g</h4>
+              </div>
+              <% value.except(:total).each do |subnutrient, grams| %>
+                <div class="row justify-content-between ml-1 px-2">
+                  <h4 class="font-weight-light"><%= subnutrient.capitalize %></h4>
+                  <% if grams.nil? %>
+                    <h4 class="font-weight-light">-</h4>
+                  <% else %>
+                    <h4 class="font-weight-light"><%= grams %> g</h4>
+                  <% end %>
+                </div>
+              <% end %>
+            <% else %>
+              <div class="row justify-content-between px-2">
+                <h4><%= nutrient.capitalize %></h4>
+                <h4><%= value %> g</h4>
+              </div>
+            <% end %>
+        <% end %>
+        <div class="row mt-3">
+          <h3>Ingredients</h3>
+          <p class="p-2"><%= product.ingredients %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

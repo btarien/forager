@@ -14,7 +14,7 @@
           <img class="product-img" src="<%= grocery.product.product_img %>" alt=""  data-toggle="modal" data-target="#product-info-<%= grocery.product.id %>">
           <div class="col-4">
             <h3><%= grocery.product.name %></h3>
-            <%= simple_form_for :grocery, url: grocery_path(grocery), method: :patch do |f| %>
+            <%= simple_form_for :grocery, url: grocery_path(grocery), method: :patch, remote: true do |f| %>
               <%= f.input :store_id, label: false, collection: new_store_array, input_html: { class: 'form-control', onchange: 'this.form.submit()' } %>
               <%= f.input :product_id, as: :hidden, input_html: {value: grocery.product.id} %>
               <%= f.input :current_store_id, as: :hidden, input_html: {value: grocery.store.id} %>
