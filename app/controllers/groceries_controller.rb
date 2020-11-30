@@ -48,5 +48,5 @@ class GroceriesController < ApplicationController
   def gro_params_map_page
     params.require(:@grocery).permit(:store_id, :product_id)
   end
-
+  
 end
