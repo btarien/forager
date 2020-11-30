@@ -51,12 +51,13 @@
           </div>
           <div class="options">
           <% if @all_favorites.any? {|favv| favv.product == product } %>
+          <i class='fa fa-heart m-2'></i>
           <% else %>
           <%= simple_form_for :@favorite, url: favorites_path do |f| %>
         <%= f.input :product_id, as: :hidden, input_html: {value: product.id} %>
         <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
-        <%= button_tag type: 'submit', class: "button postfix", data: { disable_with: "" } do %>
-          <i class="far fa-heart m-2" aria-hidden="true"></i>
+        <%= button_tag type: 'submit', class: "button border-0 bg-white postfix", 'data-disable-with' => "<i class='fa fa-heart m-2'></i>" do %>
+          <i class="fa fa-heart-o m-2" aria-hidden="true"></i>
           <% end %>
           <% end %>
         <% end %>
