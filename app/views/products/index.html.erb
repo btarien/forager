@@ -6,6 +6,18 @@
 </div>
 
 <div class="container" style="background: white; margin-top: 40vh;">
+
+  <div class="product-search p-3">
+    <%= form_tag products_path, method: :get do %>
+      <%= text_field_tag :query,
+        params[:query],
+        class: "form-control",
+        placeholder: "Find a product"
+      %>
+      <%= submit_tag "Search", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+
   <% @hash.each do | product, store_array | %>
     <%= render 'product', product: product, store_array: store_array, all_favorites: @all_favorites, all_groceries: @all_groceries %>
   <% end %>

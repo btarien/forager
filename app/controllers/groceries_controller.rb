@@ -1,4 +1,5 @@
 class GroceriesController < ApplicationController
+  before_action :gro_params_map_page, only: [:create]
   def index
     @all_stores = Store.all.map {|store| store.name }
     @groceries = Grocery.all
@@ -15,17 +16,9 @@ class GroceriesController < ApplicationController
 
     @grocery = Grocery.create(
       user: current_user,
-      store_product: StoreProduct.where(product_id: grocery_params[:product_id].to_i).find_by(store_id: grocery_params[:store_id].to_i),
+      store_product: StoreProduct.where(product_id: params["@grocery"][:product_id].to_i).find_by(store_id: params["@grocery"][:store_id].to_i),
       quantity: 1
     )
-    @all_groceries = Grocery.where(user: current_user)
-    @all_favorites = Favorite.where(user: current_user)
-    @product = @grocery.product
-    @store_array = [Store.first]
-
-    respond_to do |format|
-      format.js
-    end
   end
 
   def update
@@ -44,5 +37,9 @@ class GroceriesController < ApplicationController
 
   def groceries_params
     params.require(:grocery).permit(:store_id, :product_id, :current_store_id, :grocery_id)
+  end
+
+  def gro_params_map_page
+    params.require(:@grocery).permit(:store_id, :product_id)
   end
 end

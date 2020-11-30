@@ -1,5 +1,5 @@
 <div class="product-list row d-flex align-items-center justify-content-between p-2 border-bottom">
-  <%= simple_form_for :@grocery, url: groceries_path, remote: true, input_html: { class: "row d-flex align-items-center justify-content-between p-2 border-bottom" } do |f| %>
+  <%= simple_form_for :@grocery, url: groceries_path, input_html: { class: "row d-flex align-items-center justify-content-between p-2 border-bottom" } do |f| %>
     <div class="col-3">
       <img class="product-img" src="<%= product.product_img %>" alt="" data-toggle="modal" data-target="#product-info-<%= product.id %>">
     </div>
@@ -16,8 +16,8 @@
       <% if all_groceries.any? {|gro| gro.product == product } %>
         <i class="fas fa-check text-success fa-2x"></i>
       <% else %>
-        <%= button_tag type: 'submit', class: "button postfix border-0 bg-white" do %>
-          <i class="fas fa-shopping-basket fa-2x"></i>
+        <%= button_tag type: 'submit', class: "button border-0 bg-white postfix", 'data-disable-with' => "<i class='fas fa-check text-success fa-2x'></i>" do %>
+          <i class="fas fa-shopping-basket fa-2x" aria-hidden="true"></i>
         <% end %>
       <% end %>
     </div>

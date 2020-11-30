@@ -1,0 +1,25 @@
+// #WAVE
+.wave-container {
+    color: #FFF;
+    bottom: 0;
+    position: relative;
+    position: fixed;
+    z-index: 990;
+
+  }
+
+  @keyframes animateWave {
+    0% {
+      transform: scale(1,0);
+    }
+    100% {
+      transform: scale(1,1);
+    }
+  }
+  .wave-container > svg {
+    display: inline-block;
+    transform-origin: bottom;
+    animation: animateWave 3000ms cubic-bezier(0.1, 1, 0.2, 1) forwards;
+    height: 50vh;
+    width: 100vw;
+}

@@ -1,4 +1,4 @@
-<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
+<!-- <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -30,4 +30,31 @@
       <% end %>
     </ul>
   </div>
-</div>
+</div> -->
+
+
+<body>
+    <nav>
+      <div class="hamburger">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
+
+    <%= link_to root_path, class: "navbar-user-icon" do %>
+    <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier" %>
+    <% end %>
+
+      <ul class="nav-links">
+        <% if user_signed_in? %>
+          <li><%= link_to "Home", root_path, class: "nav-link" %></li>
+          <li><%= link_to "Grocery List", groceries_path, class: "nav-link" %></li>
+          <li><%= link_to "Favorites", favorites_path, class: "nav-link" %></li>
+          <li><%= link_to "Log out", destroy_user_session_path, method: :delete, class: "nav-link" %></li>
+          <% else %>
+          <li><%= link_to "Login", new_user_session_path, class: "nav-link" %></li>
+        <% end %>
+      </ul>
+    </nav>
+</body>
+
