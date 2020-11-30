@@ -1,20 +1,21 @@
 <div id="map"
-     style="width: 100%; height: calc(40vh - 55px); position: fixed; top: 55px; z-index: 1;"
+     style="width: 100%; height: calc(40vh - 10vh);position: absolute; top: 10vh; z-index: 1;"
      data-markers="<%= @markers.to_json %>"
      data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
      data-coordinates = "<%= @coordinates.to_json %>">
 </div>
 
-<div class="container" style="background: white; margin-top: 40vh;">
+<div class="container" style="background: white; margin-top: 30vh;">
 
   <div class="product-search p-3">
-    <%= form_tag products_path, method: :get do %>
+    <%= form_tag products_path, method: :get, :class=>"search_bar " do %>
       <%= text_field_tag :query,
         params[:query],
-        class: "form-control",
-        placeholder: "Find a product"
-      %>
-      <%= submit_tag "Search", class: "btn btn-primary" %>
+        placeholder: "Find a product",
+        class: "form-control mr-sm-2 "%>
+      <div class="ml-3">
+          <%= submit_tag "🔍", class: "search-btn" %>
+      </div>
     <% end %>
   </div>
 
