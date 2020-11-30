@@ -14,9 +14,7 @@
       <% if @all_groceries.any? {|gro| gro.product == product } %>
     </div>
     <%= image_tag product.nutriscore_img, class: "nutriscore-img" %>
-    <%= link_to grocery_path(Grocery.find_by(store_product: StoreProduct.find_by(product: product))), method: :delete do %>
-      <i class="far fa-trash-alt fa-2x text-danger"></i>
-    <% end %>
+    <i class="fas fa-check text-success"></i>
       <% else %>
       <%= simple_form_for :@grocery, url: groceries_path do |f| %>
         <%= f.input :store_id, label: false, collection: store_array, include_blank: false, input_html: {style: "width: 100px;"}%>
@@ -24,7 +22,7 @@
         <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
     </div>
     <%= image_tag product.nutriscore_img, class: "nutriscore-img" %>
-        <%= button_tag type: 'submit', class: "button postfix", data: { disable_with: "" } do %>
+        <%= button_tag type: 'submit', class: "button border-0 bg-white postfix", 'data-disable-with' => "<i class='fas fa-check text-success'></i>" do %>
           <i class="fas fa-shopping-basket" aria-hidden="true"></i>
         <% end %>
       <% end %>
