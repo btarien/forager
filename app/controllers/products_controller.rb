@@ -2,15 +2,15 @@ class ProductsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index]
 
   def index
-   
-    address = params[:address] || session[:search_location] 
+
+    address = params[:address] || session[:search_location]
     results = Geocoder.search(address) unless address.nil?
     if address.present? && results.present?
       session[:search_location] = address
       @coordinates = results.first.coordinates
-    else
-      flash.alert = "Please enter an address."
-      redirect_to root_path
+    #else
+      #flash.alert = "Please enter an address."
+      #redirect_to root_path
     end
     # convert address into latitude longitud
     # @coordinates = [address.longitude, address.latitude]
@@ -27,13 +27,26 @@ class ProductsController < ApplicationController
         infoWindow: render_to_string(partial: "info_window", locals: { store: store })
       }
     end
+
     hash_of_store_products
+
+    # if params[:query].present?
+    #   @products = Product.where(name: params[:query])
+
+    # else
+    #   @products = hash_of_store_products
+    # end
   end
 
   private
 
   def hash_of_store_products
     @hash = {}
+
+    if params[:query].present?
+      @store_products = StoreProduct.global_search(params[:query])
+    end
+
     @store_products.each do |store_product|
       if @hash.keys.include? store_product.product
         @hash[store_product.product] << store_product.store
@@ -41,6 +54,7 @@ class ProductsController < ApplicationController
         @hash[store_product.product] = [store_product.store]
       end
     end
+
     @hash
   end
 end
