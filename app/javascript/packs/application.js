@@ -27,6 +27,8 @@ import "bootstrap";
 import { initMapbox } from '../plugins/init_mapbox';
 import { initSwiping } from '../plugins/init_swiping';
 import { initAutocomplete } from '../plugins/init_autocomplete';
+import { initNavbarAnimation } from '../plugins/init_navbar_animation';
+
 
 
 // Internal imports, e.g:
@@ -38,4 +40,5 @@ document.addEventListener('turbolinks:load', () => {
   initMapbox();
   initSwiping();
   initAutocomplete();
+  initNavbarAnimation();
 });
