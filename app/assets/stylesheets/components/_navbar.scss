@@ -31,8 +31,8 @@ nav {
   height: 10vh;
   background: #97BB7F;
 
-
 }
+
 
 .navbar-user-icon img {
   width: 40px;
@@ -83,8 +83,9 @@ nav {
     margin: 5px;
   }
   nav {
-    position: relative;
+    position: sticky;
     z-index: 1000;
+    top: 0;
   }
 
   .hamburger {
@@ -102,8 +103,8 @@ nav {
     height: 100vh;
     width: 100%;
     flex-direction: column;
-    clip-path: circle(100px at 90% -10%);
-    -webkit-clip-path: circle(100px at 90% -10%);
+    clip-path: circle(70px at 90% -10%);
+    -webkit-clip-path: circle(70px at 90% -10%);
      transition: all 1s ease-out;
     pointer-events: none;
   }
