@@ -12,6 +12,11 @@ class StoreProduct < ApplicationRecord
 
   def self.hash_of_store_products
     product_hash = {}
+
+    if params[:query].present?
+      @store_products = StoreProduct.global_search(params[:query])
+    end
+
     StoreProduct.all.each do |store_product|
       if product_hash.keys.include? store_product.product
         product_hash[store_product.product] << store_product.store
