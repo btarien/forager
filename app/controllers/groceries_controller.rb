@@ -7,20 +7,20 @@ class GroceriesController < ApplicationController
     @groceries.each do |grocery|
       product = grocery.store_product.product
       shops = product.stores
-      @stores << {product: grocery, store: shops}
-
+      @stores << { product: grocery, store: shops }
     end
   end
 
   def create
-    #if @grocery.nil?
-      @grocery = Grocery.create(
-        user: current_user,
-        store_product: StoreProduct.where(product_id: params["@grocery"][:product_id].to_i).find_by(store_id: params["@grocery"][:store_id].to_i),
-        quantity: 1
-      )
+    grocery_params = params["@grocery"]
 
+    @grocery = Grocery.create(
+      user: current_user,
+      store_product: StoreProduct.where(product_id: params["@grocery"][:product_id].to_i).find_by(store_id: params["@grocery"][:store_id].to_i),
+      quantity: 1
+    )
   end
+
   def update
     grocery_params = groceries_params
     strproduct = StoreProduct.find_by(product_id: grocery_params[:product_id], store_id: grocery_params[:store_id])
@@ -29,10 +29,10 @@ class GroceriesController < ApplicationController
   end
 
   def destroy
-    gro_to_delete = Grocery.find(params[:id]).destroy
-
+    Grocery.find(params[:id]).destroy
     redirect_to groceries_path
   end
+
   private
 
   def groceries_params
@@ -42,5 +42,4 @@ class GroceriesController < ApplicationController
   def gro_params_map_page
     params.require(:@grocery).permit(:store_id, :product_id)
   end
-  
 end

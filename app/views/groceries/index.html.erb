@@ -14,7 +14,7 @@
       <% if grocery.store.name == store %>
         <div class="swiper-container favorite-card">
           <div class="swiper-wrapper">
-            
+
               <div class="swiper-slide">
                 <div class="red-box">
                   <%= link_to "", grocery_path(grocery), method: :delete, class: "action fa fa-trash trash-icon novaklasa"%>
@@ -33,9 +33,8 @@
                   <% end %>
                 </div>
                 <%= image_tag grocery.product.nutriscore_img, class: "nutriscore-img" %>
-    
+
               </div>
-            
           </div>
         </div>
       <% end %>
