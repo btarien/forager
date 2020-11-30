@@ -1,6 +1,6 @@
 <div class="bg-success text-white">
-  <h1 class="p-2 text-center">Favorites</h1>
-  <%= link_to "Back", products_path %>
+  <h1 class="p-2 text-center" style="text-decoration: 2px underline">Favorites</h1>
+  <%= link_to "", products_path, class: "fas fa-arrow-left ml-2", style: "text-decoration: none" %>
 </div>
 <% @favorites.each do |favorite| %>
   <div class="favorite-card swiper-container">
