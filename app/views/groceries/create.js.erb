@@ -1,0 +1,14 @@
+(() => {
+  const basket = document.querySelector(".counter_basket")
+  if(basket){
+    basket.innerText = "<%= groceries_counter %>"
+  }
+
+  const submitButton = document.querySelector(
+    ".grocery-submit-button[data-product-id='<%= @grocery.product.id %>']"
+  )
+  const button = submitButton.querySelector(".add-grocery")
+  button.classList.add("d-none")
+  const check = submitButton.querySelector(".grocery-added")
+  check.classList.remove("d-none")
+})();
