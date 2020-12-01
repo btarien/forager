@@ -4,8 +4,8 @@
       <img class="product-img" src="<%= product.product_img %>" alt="" data-toggle="modal" data-target="#product-info-<%= product.id %>">
     </div>
     <div class="col-4">
-      <h3><%= product.name %></h3>
-      <%= f.input :store_id, label: false, include_blank: false, include_hidden: false, collection: store_array, input_html: {style: "width: 100px;"}%>
+      <h3 class="p-name" data-toggle="modal" data-target="#product-info-<%= product.id %>"><%= product.name %></h3>
+      <%= f.input :store_id, label: false,include_blank: false, include_hidden: false, collection: store_array, input_html: {style: "width: 100px;"}%>
     </div>
     <%= f.input :product_id, as: :hidden, input_html: {value: product.id} %>
     <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
