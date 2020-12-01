@@ -3,6 +3,7 @@ class GroceriesController < ApplicationController
   def index
     @all_stores = Store.all.map {|store| store.name }
     @groceries = Grocery.all
+    @all_favorites = Favorite.where(user: current_user)
     @stores = []
     @groceries.each do |grocery|
       product = grocery.store_product.product
