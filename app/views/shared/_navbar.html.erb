@@ -45,7 +45,7 @@
     <%= link_to groceries_path, class: "navbar-cart-icon" do %>
     <i class="fas fa-shopping-basket cart-icon fa-2x"></i>
     <% end %>
-    <p class="counter_basket"><%= @gro_counter %></p>
+    <p class="counter_basket"><%= groceries_counter %></p>
 
       <ul class="nav-links">
         <% if user_signed_in? %>
