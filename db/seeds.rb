@@ -12,8 +12,8 @@ Product.destroy_all
 Store.destroy_all
 
 puts 'creating users...'
-User.create!(email: "alice@example.com", password: "123456")
-User.create!(email: "bob@example.com", password: "123456")
+User.create!(email: "alice@example.com", password: "123456", image: 'https://source.unsplash.com/a7itXABwl8U/100x100')
+User.create!(email: "bob@example.com", password: "123456", image: 'https://source.unsplash.com/8PMvB4VyVXA/100x100')
 
 puts 'creating stores...'
 Store.create!(name: 'Aldi', address: 'Schwanthalerstraße 14, 80336 München', url: 'https://www.aldi-sued.de/de/suchergebnis.html?search=', name_class: '.product-title')
