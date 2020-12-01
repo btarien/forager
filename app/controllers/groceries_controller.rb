@@ -1,8 +1,13 @@
 class GroceriesController < ApplicationController
   before_action :gro_params_map_page, only: [:create]
   def index
-    @all_stores = Store.all.map {|store| store.name }
+    @all_stores = []
+
     @groceries = Grocery.all
+    @groceries.each do |g|
+      @all_stores << g.store_product.store.name
+    end
+    @all_stores = @all_stores.uniq
     @all_favorites = Favorite.where(user: current_user)
     @stores = []
     @groceries.each do |grocery|
