@@ -29,6 +29,7 @@
 
 .cloud {
   position: absolute;
+  width: 100%;
   left: 0;
   background: white;
   border-radius: 1000px;
@@ -58,14 +59,15 @@
 }
 
 @keyframes zoomies {
-  from {
-    left: 0;
-    transform: translateX(-100%);
-  }
-  to {
-    left: 100%;
-    transform: translateX(0%);
-  }
+  0%, 5%, 95%, 100% {
+        left: 0%;
+        transform: translate(0, 0);
+    }
+    45%, 55% {
+        left: 100%;
+        transform: translate(-100%, 0);
+    }
+
 
 }
 

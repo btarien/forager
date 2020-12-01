@@ -1,6 +1,6 @@
-<div class="bg-success text-white" style="margin-top: 55px;">
-  <h1 class="p-2 text-center">Grocery list</h1>
-  <%= link_to "Back", products_path %>
+<div class="bg-success text-white" >
+  <h1 class="pt-2 text-center" style="text-decoration: 2px underline" >Grocery list</h1>
+  <%= link_to "", products_path, class: "fas fa-arrow-left ml-2", style: "text-decoration: none" %>
 </div>
 
 <div style="overflow: scroll;">
@@ -23,7 +23,7 @@
               <div class="swiper-slide border-bottom p-2 d-flex align-items-center justify-content-between">
                 <img class="product-img" src="<%= grocery.product.product_img %>" alt=""  data-toggle="modal" data-target="#product-info-<%= grocery.product.id %>">
                 <div class="col-4">
-                  <h3><%= grocery.product.name %></h3>
+                  <h3 class="p-name" data-toggle="modal" data-target="#product-info-<%= grocery.product.id %>"><%= grocery.product.name %></h3>
                   <%= simple_form_for :grocery, url: grocery_path(grocery), method: :patch do |f| %>
                     <%= f.input :store_id, label: false, collection: new_store_array, input_html: { class: 'form-control', onchange: 'this.form.submit()' } %>
                     <%= f.input :product_id, as: :hidden, input_html: {value: grocery.product.id} %>
@@ -33,6 +33,7 @@
                   <% end %>
                 </div>
                 <%= image_tag grocery.product.nutriscore_img, class: "nutriscore-img" %>
+                
 
               </div>
           </div>
@@ -47,10 +48,19 @@
               <div class="back">
                 <i class="fas fa-arrow-left" data-dismiss="modal"></i>
               </div>
-              <div class="options">
-                <i class="far fa-heart m-2"></i>
-                <i class="fas fa-shopping-basket m-2"></i>
-              </div>
+              <div class="options d-flex align-items-end">
+                <% if @all_favorites.any? {|favv| favv.product == grocery.product } %>
+                  <i class='fa fa-heart m-2'></i>
+                <% else %>
+                  <%= simple_form_for :@favorite, url: favorites_path do |f| %>
+                  <%= f.input :product_id, as: :hidden, input_html: {value: grocery.product.id} %>
+                  <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
+                  <%= button_tag type: 'submit', class: "button border-0 bg-white postfix", 'data-disable-with' => "<i class='fa fa-heart m-2'></i>" do %>
+                  <i class="fa fa-heart-o m-2" aria-hidden="true"></i>
+                <% end %>
+            <% end %>
+          <% end %>
+        </div>
             </div>
             <div class="modal-body">
               <div class="row border-bottom d-flex justify-content-between">

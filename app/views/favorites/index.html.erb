@@ -1,6 +1,6 @@
 <div class="bg-success text-white">
-  <h1 class="p-2 text-center">Favorites</h1>
-  <%= link_to "Back", products_path %>
+  <h1 class="p-2 text-center" style="text-decoration: 2px underline">Favorites</h1>
+  <%= link_to "", products_path, class: "fas fa-arrow-left ml-2", style: "text-decoration: none" %>
 </div>
 <% @favorites.each do |favorite| %>
   <div class="favorite-card swiper-container">
@@ -14,7 +14,7 @@
       <div class="swiper-slide">
         <img class="product-img" src="<%= favorite.product.product_img %>" alt=""  data-toggle="modal" data-target="#product-info-<%= favorite.product.id %>">
         <div class="favorite-name">
-          <p><%= favorite.product.name %></p>
+          <p class="p-name" data-toggle="modal" data-target="#product-info-<%= favorite.product.id %>"><%= favorite.product.name %></p>
         </div>
       </div>
     </div>
@@ -27,8 +27,7 @@
             <i class="fas fa-arrow-left" data-dismiss="modal"></i>
           </div>
           <div class="options">
-            <i class="far fa-heart m-2"></i>
-            <i class="fas fa-shopping-basket m-2"></i>
+
           </div>
         </div>
         <div class="modal-body">
