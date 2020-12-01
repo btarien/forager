@@ -47,10 +47,19 @@
               <div class="back">
                 <i class="fas fa-arrow-left" data-dismiss="modal"></i>
               </div>
-              <div class="options">
-                <i class="far fa-heart m-2"></i>
-                <i class="fas fa-shopping-basket m-2"></i>
-              </div>
+              <div class="options d-flex align-items-end">
+                <% if @all_favorites.any? {|favv| favv.product == grocery.product } %>
+                  <i class='fa fa-heart m-2'></i>
+                <% else %>
+                  <%= simple_form_for :@favorite, url: favorites_path do |f| %>
+                  <%= f.input :product_id, as: :hidden, input_html: {value: grocery.product.id} %>
+                  <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
+                  <%= button_tag type: 'submit', class: "button border-0 bg-white postfix", 'data-disable-with' => "<i class='fa fa-heart m-2'></i>" do %>
+                  <i class="fa fa-heart-o m-2" aria-hidden="true"></i>
+                <% end %>
+            <% end %>
+          <% end %>
+        </div>
             </div>
             <div class="modal-body">
               <div class="row border-bottom d-flex justify-content-between">

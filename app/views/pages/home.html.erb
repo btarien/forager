@@ -8,7 +8,7 @@
     <%= form_tag products_path, method: :get, :class=>"search_bar " do %>
       <%= text_field_tag :address,
         params[:address],
-        placeholder: "Your location?",
+        placeholder: "Your address?",
         class: "address-search form-control mr-sm-2"%>
       <div class="ml-3">
           <%= submit_tag "🔍", class: "search-btn" %>
