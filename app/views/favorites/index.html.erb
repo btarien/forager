@@ -14,7 +14,7 @@
       <div class="swiper-slide">
         <img class="product-img" src="<%= favorite.product.product_img %>" alt=""  data-toggle="modal" data-target="#product-info-<%= favorite.product.id %>">
         <div class="favorite-name">
-          <p><%= favorite.product.name %></p>
+          <p class="p-name" data-toggle="modal" data-target="#product-info-<%= favorite.product.id %>"><%= favorite.product.name %></p>
         </div>
       </div>
     </div>
@@ -27,7 +27,7 @@
             <i class="fas fa-arrow-left" data-dismiss="modal"></i>
           </div>
           <div class="options">
-           
+
           </div>
         </div>
         <div class="modal-body">
