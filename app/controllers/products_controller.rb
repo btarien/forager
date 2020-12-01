@@ -16,6 +16,8 @@ class ProductsController < ApplicationController
     @grocery = Grocery.new
     @store_products = StoreProduct.all
     @stores = Store.all
+
+   
     @markers = @stores.geocoded.map do |store|
       {
         lat: store.latitude,
@@ -23,6 +25,10 @@ class ProductsController < ApplicationController
         infoWindow: render_to_string(partial: "info_window", locals: { store: store })
       }
     end
+    
+    @markers = [] if @markers.nil?
+    @markers << get_current_address(address) if address.present?
+    p @markers
     hash_of_store_products
   end
 
@@ -44,5 +50,15 @@ class ProductsController < ApplicationController
     end
 
     @hash
+  end
+
+  def get_current_address(address)
+    results = Geocoder.search(address)
+    coordinates = results.first.coordinates
+    return {
+      lat: coordinates.first,
+      lng: coordinates.last,
+      imageUrl: helpers.asset_url('map-marker.png')
+    } 
   end
 end
