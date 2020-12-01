@@ -4,6 +4,7 @@ class GroceriesController < ApplicationController
     @all_stores = Store.all.map {|store| store.name }
     @groceries = Grocery.all
     @all_favorites = Favorite.where(user: current_user)
+    @gro_counter = Grocery.where(user: current_user).size
     @stores = []
     @groceries.each do |grocery|
       product = grocery.store_product.product

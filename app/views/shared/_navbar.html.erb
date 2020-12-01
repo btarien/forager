@@ -42,6 +42,10 @@
     <%= link_to root_path, class: "navbar-user-icon" do %>
     <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier" %>
     <% end %>
+    <%= link_to groceries_path, class: "navbar-cart-icon" do %>
+    <i class="fas fa-shopping-basket cart-icon fa-2x"></i>
+    <% end %>
+    <p class="counter_basket"><%= @gro_counter %></p>
 
       <ul class="nav-links">
         <% if user_signed_in? %>
