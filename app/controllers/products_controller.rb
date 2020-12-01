@@ -4,11 +4,14 @@ class ProductsController < ApplicationController
   def index
     address = params[:address] || session[:search_location]
     results = Geocoder.search(address) unless address.nil?
-    @gro_counter = Grocery.where(user: current_user).size
-    if address.present? && results.present?
-      session[:search_location] = address
-      @coordinates = results.first.coordinates
-    end
+      if address.present? && results.present?
+        session[:search_location] = address
+        @coordinates = results.first.coordinates
+      else 
+        flash.alert = "Please enter an address."
+        redirect_to root_path
+      end
+    
     # convert address into latitude longitude
     # @coordinates = [address.longitude, address.latitude]
     # in the view, read these @coordinates
