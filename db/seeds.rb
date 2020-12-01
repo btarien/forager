@@ -22,7 +22,7 @@ Store.create!(name: 'Kaufland', address: 'Schwanthalerstraße 31, 80336 München
 # Store.create!(name: 'Metro', address: 'Schwanthalerstraße 31, 80336 München', url: 'https://produkte.metro.de/shop/search?q=')
 
 puts 'creating products...'
-products = ["Milch", "Muesli"]
+products = ["Yogurt"]
 
 products.each do |product|
   Store.all.each do |store|
