@@ -1,23 +1,36 @@
 <!-- Modal -->
-<div class="modal fade" id="product-info-<%= favorite.product.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+<div class="modal fade" id="product-info-<%= product.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content p-3">
       <div class="modal-header row">
         <div class="back">
           <i class="fas fa-arrow-left" data-dismiss="modal"></i>
         </div>
+        <div class="options d-flex align-items-end">
+          <% if product.favorite?(current_user) %>
+            <i class='fa fa-heart m-2'></i>
+          <% else %>
+            <%= simple_form_for :@favorite, url: favorites_path do |f| %>
+            <%= f.input :product_id, as: :hidden, input_html: {value: product.id} %>
+            <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
+            <%= button_tag type: 'submit', class: "button border-0 bg-white postfix", 'data-disable-with' => "<i class='fa fa-heart m-2'></i>" do %>
+            <i class="fa fa-heart-o m-2" aria-hidden="true"></i>
+          <% end %>
+      <% end %>
+    <% end %>
+  </div>
       </div>
       <div class="modal-body">
         <div class="row border-bottom d-flex justify-content-between">
           <div class="col-8">
-            <h1 class="modal-title"><%= favorite.product.name %></h1>
-            <h2><%= favorite.product.brand %></h2>
+            <h1 class="modal-title"><%= product.name %></h1>
+            <h2><%= product.brand %></h2>
           </div>
           <div class="col-4">
-            <%= image_tag favorite.product.nutriscore_img, size: "100x50"%>
+            <%= image_tag product.nutriscore_img, size: "100x50"%>
           </div>
         </div>
-        <% nutrition = JSON.parse(favorite.product.nutrition, symbolize_names: true) %>
+        <% nutrition = JSON.parse(product.nutrition, symbolize_names: true) %>
         <% unless nutrition[:calories].nil? %>
           <div class="row justify-content-between my-5 mx-2">
             <div class="text-center d-flex flex-column justify-content-center">
@@ -75,7 +88,7 @@
         <% end %>
         <div class="row mt-3">
           <h3>Ingredients</h3>
-          <p class="p-2"><%= favorite.product.ingredients %></p>
+          <p class="p-2"><%= product.ingredients %></p>
         </div>
       </div>
     </div>

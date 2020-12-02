@@ -20,6 +20,6 @@
   </div>
 
   <% @hash.each do | product, store_array | %>
-    <%= render 'product', product: product, store_array: store_array, all_favorites: @all_favorites, all_groceries: @all_groceries %>
+    <%= render 'product', product: product, store_array: store_array, all_groceries: @all_groceries %>
   <% end %>
 </div>
