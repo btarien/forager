@@ -13,7 +13,7 @@ nav {
   background: $primary;
   position: sticky;
   width: 100%;
-  z-index: 3;
+  z-index: 4;
   top: 0;
   display: flex;
   justify-content: space-between;
@@ -46,7 +46,6 @@ nav {
   position: fixed;
   top: 60px;
   right: 0;
-  z-index: 2;
   list-style: none;
   height: 100vh;
   width: 100%;
