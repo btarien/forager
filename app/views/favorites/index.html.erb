@@ -1,107 +1,106 @@
 <div class="bg-success text-white">
-  <h1 class="p-2 text-center" style="text-decoration: 2px underline">Favorites</h1>
+  <h1 class="pt-2 text-center">Favorites</h1>
   <%= link_to "", products_path, class: "fas fa-arrow-left ml-2", style: "text-decoration: none" %>
 </div>
-<% @favorites.each do |favorite| %>
-  <div class="favorite-card swiper-container">
-    <div class="swiper-wrapper">
-      <div class="swiper-slide">
-        <div class="red-box">
-          <%= link_to "", favorite_path(favorite), method: :delete, class: "action fa fa-trash trash-icon novaklasa" %>
-
+<div class="my-2 bg-white container">
+  <% @favorites.each do |favorite| %>
+    <div class="swiper-container favorite-card">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <div class="red-box mr-1">
+            <%= link_to "", favorite_path(favorite), method: :delete, class: "action fa fa-trash trash-icon novaklasa" %>
+          </div>
         </div>
-      </div>
-      <div class="swiper-slide">
-        <img class="product-img" src="<%= favorite.product.product_img %>" alt=""  data-toggle="modal" data-target="#product-info-<%= favorite.product.id %>">
-        <div class="favorite-name">
-          <p class="p-name" data-toggle="modal" data-target="#product-info-<%= favorite.product.id %>"><%= favorite.product.name %></p>
+        <div class="swiper-slide border-bottom p-2 d-flex align-items-center">
+          <img class="product-img mr-4" src="<%= favorite.product.product_img %>" alt=""  data-toggle="modal" data-target="#product-info-<%= favorite.product.id %>">
+          <h3 data-toggle="modal" data-target="#product-info-<%= favorite.product.id %>"><%= favorite.product.name %></h3>
         </div>
       </div>
     </div>
-  </div>
-  <div class="modal fade" id="product-info-<%= favorite.product.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content p-3">
-        <div class="modal-header row">
-          <div class="back">
-            <i class="fas fa-arrow-left" data-dismiss="modal"></i>
-          </div>
-          <div class="options">
+    <div class="modal fade" id="product-info-<%= favorite.product.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content p-3">
+          <div class="modal-header row">
+            <div class="back">
+              <i class="fas fa-arrow-left" data-dismiss="modal"></i>
+            </div>
+            <div class="options">
 
-          </div>
-        </div>
-        <div class="modal-body">
-          <div class="row border-bottom d-flex justify-content-between">
-            <div class="col-8">
-              <h1 class="modal-title"><%= favorite.product.name %></h1>
-              <h2><%= favorite.product.brand %></h2>
-            </div>
-            <div class="col-4">
-              <%= image_tag favorite.product.nutriscore_img, size: "100x50"%>
             </div>
           </div>
-          <% nutrition = JSON.parse(favorite.product.nutrition, symbolize_names: true) %>
-          <% unless nutrition[:calories].nil? %>
-            <div class="row justify-content-between my-5 mx-2">
-              <div class="text-center d-flex flex-column justify-content-center">
-                <!-- <ul class="chart-skills">
-                  <li><span></span></li>
-                  <li><span></span></li>
-                  <li><span></span></li>
-                </ul> -->
-                <h3 class="m-0" style="line-height: 1em;"><%= nutrition[:calories] %></h3>
-                <p class="m-0" style="line-height: 1em;">cal</p>
+          <div class="modal-body">
+            <div class="row border-bottom d-flex justify-content-between">
+              <div class="col-8">
+                <h1 class="modal-title"><%= favorite.product.name %></h1>
+                <h2><%= favorite.product.brand %></h2>
               </div>
-              <div class="text-center">
-                <p class="m-0" style="color: blue; line-height: 1em"><%= ((nutrition[:carbohydrates][:total] * 4).fdiv(nutrition[:calories]) * 100).round %>%</p>
-                <h3 class="m-0" style="line-height: 1em;"><%= nutrition[:carbohydrates][:total] %> g</h3>
-                <p class="m-0" style="line-height: 1em">carbs</p>
-              </div>
-              <div class="text-center">
-                <p class="m-0" style="color: red; line-height: 1em;"><%= ((nutrition[:fat][:total] * 4).fdiv(nutrition[:calories]) * 100).round %>%</p>
-                <h3 class="m-0" style="line-height: 1em;"><%= nutrition[:fat][:total] %> g</h3>
-                <p class="m-0" style="line-height: 1em;">fat</p>
-              </div>
-              <div class="text-center">
-                <p class="m-0" style="color: purple; line-height: 1em;"><%= ((nutrition[:protein] * 4).fdiv(nutrition[:calories]) * 100).round %>%</p>
-                <h3 class="m-0" style="line-height: 1em;"><%= nutrition[:protein]%> g</h3>
-                <p class="m-0" style="line-height: 1em;">protein</p>
+              <div class="col-4">
+                <%= image_tag favorite.product.nutriscore_img, size: "100x50"%>
               </div>
             </div>
-          <% end %>
-          <div class="row justify-content-between bg-light p-2">
-            <h3>Nutrition Facts</h3>
-            <h3>per 100g</h3>
-          </div>
-          <% nutrition.each do |nutrient, value| %>
-              <% if value.class == Hash %>
-                <div class="row justify-content-between px-2">
-                  <h4><%= nutrient.capitalize %></h4>
-                  <h4><%= value.values.first %> g</h4>
+            <% nutrition = JSON.parse(favorite.product.nutrition, symbolize_names: true) %>
+            <% unless nutrition[:calories].nil? %>
+              <div class="row justify-content-between my-5 mx-2">
+                <div class="text-center d-flex flex-column justify-content-center">
+                  <!-- <ul class="chart-skills">
+                    <li><span></span></li>
+                    <li><span></span></li>
+                    <li><span></span></li>
+                  </ul> -->
+                  <h3 class="m-0" style="line-height: 1em;"><%= nutrition[:calories] %></h3>
+                  <p class="m-0" style="line-height: 1em;">cal</p>
                 </div>
-                <% value.except(:total).each do |subnutrient, grams| %>
-                  <div class="row justify-content-between ml-1 px-2">
-                    <h4 class="font-weight-light"><%= subnutrient.capitalize %></h4>
-                    <% if grams.nil? %>
-                      <h4 class="font-weight-light">-</h4>
-                    <% else %>
-                      <h4 class="font-weight-light"><%= grams %> g</h4>
-                    <% end %>
+                <div class="text-center">
+                  <p class="m-0" style="color: blue; line-height: 1em"><%= ((nutrition[:carbohydrates][:total] * 4).fdiv(nutrition[:calories]) * 100).round %>%</p>
+                  <h3 class="m-0" style="line-height: 1em;"><%= nutrition[:carbohydrates][:total] %> g</h3>
+                  <p class="m-0" style="line-height: 1em">carbs</p>
+                </div>
+                <div class="text-center">
+                  <p class="m-0" style="color: red; line-height: 1em;"><%= ((nutrition[:fat][:total] * 4).fdiv(nutrition[:calories]) * 100).round %>%</p>
+                  <h3 class="m-0" style="line-height: 1em;"><%= nutrition[:fat][:total] %> g</h3>
+                  <p class="m-0" style="line-height: 1em;">fat</p>
+                </div>
+                <div class="text-center">
+                  <p class="m-0" style="color: purple; line-height: 1em;"><%= ((nutrition[:protein] * 4).fdiv(nutrition[:calories]) * 100).round %>%</p>
+                  <h3 class="m-0" style="line-height: 1em;"><%= nutrition[:protein]%> g</h3>
+                  <p class="m-0" style="line-height: 1em;">protein</p>
+                </div>
+              </div>
+            <% end %>
+            <div class="row justify-content-between bg-light p-2">
+              <h3>Nutrition Facts</h3>
+              <h3>per 100g</h3>
+            </div>
+            <% nutrition.each do |nutrient, value| %>
+                <% if value.class == Hash %>
+                  <div class="row justify-content-between px-2">
+                    <h4><%= nutrient.capitalize %></h4>
+                    <h4><%= value.values.first %> g</h4>
+                  </div>
+                  <% value.except(:total).each do |subnutrient, grams| %>
+                    <div class="row justify-content-between ml-1 px-2">
+                      <h4 class="font-weight-light"><%= subnutrient.capitalize %></h4>
+                      <% if grams.nil? %>
+                        <h4 class="font-weight-light">-</h4>
+                      <% else %>
+                        <h4 class="font-weight-light"><%= grams %> g</h4>
+                      <% end %>
+                    </div>
+                  <% end %>
+                <% else %>
+                  <div class="row justify-content-between px-2">
+                    <h4><%= nutrient.capitalize %></h4>
+                    <h4><%= value %> g</h4>
                   </div>
                 <% end %>
-              <% else %>
-                <div class="row justify-content-between px-2">
-                  <h4><%= nutrient.capitalize %></h4>
-                  <h4><%= value %> g</h4>
-                </div>
-              <% end %>
-          <% end %>
-          <div class="row mt-3">
-            <h3>Ingredients</h3>
-            <p class="p-2"><%= favorite.product.ingredients %></p>
+            <% end %>
+            <div class="row mt-3">
+              <h3>Ingredients</h3>
+              <p class="p-2"><%= favorite.product.ingredients %></p>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-<% end %>
+  <% end %>
+</div>
