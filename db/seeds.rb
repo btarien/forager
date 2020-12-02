@@ -21,7 +21,7 @@ Store.create!(name: 'Aldi', address: 'Schwanthalerstraße 14, 80336 München', u
 Store.create!(name: 'Edeka', address: 'Schwanthalerstraße 31, 80336 München', url: 'https://e-center-knauer.edeka-shops.de/en/search?SearchTerm=', name_class: '.product-title')
 # Store.create!(name: 'Metro', address: 'Schwanthalerstraße 31, 80336 München', url: 'https://produkte.metro.de/shop/search?q=')
 
-puts 'creating products...'
+puts 'creating products and store-products...'
 products = ['Joghurt', 'nudeln']
 
 products.each do |product|
@@ -85,20 +85,15 @@ products.each do |product|
   end
 end
 
-# puts 'creating store-products...'
-# StoreProduct.create!(price: 2.5, product: Product.first, store: Store.first)
-# StoreProduct.create!(price: 3.0, product: Product.second, store: Store.first)
-# StoreProduct.create!(price: 0.5, product: Product.third, store: Store.first)
-# StoreProduct.create!(price: 2.5, product: Product.fourth, store: Store.second)
-# StoreProduct.create!(price: 3.0, product: Product.fifth, store: Store.second)
-# StoreProduct.create!(price: 0.5, product: Product.last, store: Store.second)
-# StoreProduct.create!(price: 0.5, product: Product.last, store: Store.first)
+StoreProduct.create!(product: Product.first, store: Store.second)
+StoreProduct.create!(product: Product.second, store: Store.second)
+StoreProduct.create!(product: Product.third, store: Store.second)
 
-# puts 'creating groceries...'
-# Grocery.create!(quantity: 2, user: User.first, store_product: StoreProduct.first)
-# Grocery.create!(quantity: 1, user: User.first, store_product: StoreProduct.second)
-# Grocery.create!(quantity: 6, user: User.first, store_product: StoreProduct.third)
+puts 'creating groceries...'
+Grocery.create!(quantity: 2, user: User.first, store_product: StoreProduct.first)
+Grocery.create!(quantity: 1, user: User.first, store_product: StoreProduct.second)
+Grocery.create!(quantity: 6, user: User.first, store_product: StoreProduct.third)
 
-# puts 'creating favorites...'
-# Favorite.create!(product: Product.first, user: User.first)
-# Favorite.create!(product: Product.second, user: User.first)
+puts 'creating favorites...'
+Favorite.create!(product: Product.first, user: User.first)
+Favorite.create!(product: Product.second, user: User.first)
