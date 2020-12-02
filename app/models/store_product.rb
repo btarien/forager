@@ -7,7 +7,7 @@ class StoreProduct < ApplicationRecord
 
   pg_search_scope :global_search,
     associated_against: {
-      product: [:name]
+      product: [:category]
     },
     using: {
       tsearch: { prefix: true }

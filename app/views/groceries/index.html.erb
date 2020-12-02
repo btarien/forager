@@ -5,8 +5,8 @@
 
 <div style="overflow: scroll;">
   <% @all_stores.each do |store| %>
-    <div class="my-2 bg-white container">
-      <h1><u><%= store %></u></h1>
+    <div class="pt-3 mb-2 bg-white container">
+      <h1><u class="py-1 px-2" style="border-style: solid; text-decoration: none; border-color: #97BB7F;"><%= store %></u></h1>
       <% @groceries.each do |grocery| %>
         <% new_product_array = @stores.select { |store_hash| store_hash[:product].product == grocery.product} %>
         <% new_store_array = new_product_array.map { |product| product[:store]}.flatten.uniq %>
@@ -15,7 +15,7 @@
           <div class="swiper-container favorite-card">
             <div class="swiper-wrapper">
               <div class="swiper-slide">
-                <div class="red-box">
+                <div class="red-box mr-1">
                   <%= link_to "", grocery_path(grocery), method: :delete, class: "action fa fa-trash trash-icon novaklasa"%>
                 </div>
               </div>
