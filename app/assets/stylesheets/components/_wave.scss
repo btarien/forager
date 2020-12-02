@@ -10,7 +10,7 @@
     bottom: 0;
     position: relative;
     position: fixed;
-    z-index: 990;
+    z-index: 1;
 
   }
 
@@ -41,8 +41,6 @@
     bottom: 0;
     position: relative;
     position: fixed;
-    z-index: 990;
-
   }
 
   @keyframes animateWave {
