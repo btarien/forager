@@ -5,6 +5,7 @@ class Product < ApplicationRecord
   has_many :groceries, through: :store_products
 
   validates :name, :brand, :nutriscore, presence: true
+  validates_uniqueness_of :code
 
   def favorite?(user)
     user.favorites.where(product: self).any?

@@ -1,9 +1,9 @@
 <div class="product-list row d-flex align-items-center justify-content-between p-2 border-bottom">
-  <%= simple_form_for :@grocery, 
+  <%= simple_form_for :@grocery,
                       url: groceries_path,
-                      remote: true, 
-                      input_html: { 
-                        class: "row d-flex align-items-center justify-content-between p-2 border-bottom" 
+                      remote: true,
+                      input_html: {
+                        class: "row d-flex align-items-center justify-content-between p-2 border-bottom"
                       } do |f| %>
     <div class="col-3">
       <img class="product-img" src="<%= product.product_img %>" alt="" data-toggle="modal" data-target="#product-info-<%= product.id %>">
@@ -62,33 +62,35 @@
             <%= image_tag product.nutriscore_img, size: "100x50"%>
           </div>
         </div>
-        <div class="row justify-content-between my-5 mx-2">
-          <% nutrition = JSON.parse(product.nutrition, symbolize_names: true) %>
-          <div class="text-center d-flex flex-column justify-content-center">
-            <!-- <ul class="chart-skills">
-              <li><span></span></li>
-              <li><span></span></li>
-              <li><span></span></li>
-            </ul> -->
-            <h3 class="m-0" style="line-height: 1em;"><%= nutrition[:calories] %></h3>
-            <p class="m-0" style="line-height: 1em;">cal</p>
+        <% nutrition = JSON.parse(product.nutrition, symbolize_names: true) %>
+        <% unless nutrition[:calories].nil? %>
+          <div class="row justify-content-between my-5 mx-2">
+            <div class="text-center d-flex flex-column justify-content-center">
+              <!-- <ul class="chart-skills">
+                <li><span></span></li>
+                <li><span></span></li>
+                <li><span></span></li>
+              </ul> -->
+              <h3 class="m-0" style="line-height: 1em;"><%= nutrition[:calories] %></h3>
+              <p class="m-0" style="line-height: 1em;">cal</p>
+            </div>
+            <div class="text-center">
+              <p class="m-0" style="color: blue; line-height: 1em"><%= ((nutrition[:carbohydrates][:total] * 4).fdiv(nutrition[:calories]) * 100).round %>%</p>
+              <h3 class="m-0" style="line-height: 1em;"><%= nutrition[:carbohydrates][:total] %> g</h3>
+              <p class="m-0" style="line-height: 1em">carbs</p>
+            </div>
+            <div class="text-center">
+              <p class="m-0" style="color: red; line-height: 1em;"><%= ((nutrition[:fat][:total] * 4).fdiv(nutrition[:calories]) * 100).round %>%</p>
+              <h3 class="m-0" style="line-height: 1em;"><%= nutrition[:fat][:total] %> g</h3>
+              <p class="m-0" style="line-height: 1em;">fat</p>
+            </div>
+            <div class="text-center">
+              <p class="m-0" style="color: purple; line-height: 1em;"><%= ((nutrition[:protein] * 4).fdiv(nutrition[:calories]) * 100).round %>%</p>
+              <h3 class="m-0" style="line-height: 1em;"><%= nutrition[:protein]%> g</h3>
+              <p class="m-0" style="line-height: 1em;">protein</p>
+            </div>
           </div>
-          <div class="text-center">
-            <p class="m-0" style="color: blue; line-height: 1em"><%= ((nutrition[:carbohydrates][:total] * 4).fdiv(nutrition[:calories]) * 100).round %>%</p>
-            <h3 class="m-0" style="line-height: 1em;"><%= nutrition[:carbohydrates][:total] %> g</h3>
-            <p class="m-0" style="line-height: 1em">carbs</p>
-          </div>
-          <div class="text-center">
-            <p class="m-0" style="color: red; line-height: 1em;"><%= ((nutrition[:fat][:total] * 4).fdiv(nutrition[:calories]) * 100).round %>%</p>
-            <h3 class="m-0" style="line-height: 1em;"><%= nutrition[:fat][:total] %> g</h3>
-            <p class="m-0" style="line-height: 1em;">fat</p>
-          </div>
-          <div class="text-center">
-            <p class="m-0" style="color: purple; line-height: 1em;"><%= ((nutrition[:protein] * 4).fdiv(nutrition[:calories]) * 100).round %>%</p>
-            <h3 class="m-0" style="line-height: 1em;"><%= nutrition[:protein]%> g</h3>
-            <p class="m-0" style="line-height: 1em;">protein</p>
-          </div>
-        </div>
+        <% end %>
         <div class="row justify-content-between bg-light p-2">
           <h3>Nutrition Facts</h3>
           <h3>per 100g</h3>

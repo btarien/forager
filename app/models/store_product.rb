@@ -1,7 +1,10 @@
 class StoreProduct < ApplicationRecord
+  include PgSearch::Model
+
   belongs_to :product
   belongs_to :store
-  include PgSearch::Model
+  validates_uniqueness_of :product, scope: :store
+
   pg_search_scope :global_search,
     associated_against: {
       product: [:name]

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_26_112908) do
+ActiveRecord::Schema.define(version: 2020_12_01_192628) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,8 @@ ActiveRecord::Schema.define(version: 2020_11_26_112908) do
     t.string "ingredients"
     t.string "nutriscore_img"
     t.string "product_img"
+    t.string "code"
+    t.string "category"
   end
 
   create_table "store_products", force: :cascade do |t|
@@ -52,7 +54,6 @@ ActiveRecord::Schema.define(version: 2020_11_26_112908) do
     t.bigint "store_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.boolean "in_grocery", default: true
     t.index ["product_id"], name: "index_store_products_on_product_id"
     t.index ["store_id"], name: "index_store_products_on_store_id"
   end
@@ -64,6 +65,8 @@ ActiveRecord::Schema.define(version: 2020_11_26_112908) do
     t.datetime "updated_at", precision: 6, null: false
     t.float "latitude"
     t.float "longitude"
+    t.string "url"
+    t.string "name_class"
   end
 
   create_table "users", force: :cascade do |t|
@@ -74,6 +77,7 @@ ActiveRecord::Schema.define(version: 2020_11_26_112908) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "image"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

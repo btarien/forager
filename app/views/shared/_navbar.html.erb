@@ -1,62 +1,28 @@
-<!-- <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
-
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <%= link_to root_path, class: "navbar-user-icon" do %>
-    <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier" %>
-    <% end %>
-
-  <div class="collapse navbar-collapse bg-white" id="navbarSupportedContent">
-    <ul class="navbar-nav">
-      <% if user_signed_in? %>
-        <li class="nav-item active px-2">
-          <%= link_to "Home", root_path, class: "nav-link" %>
-        </li>
-        <li class="nav-item px-2">
-          <%= link_to "Grocery List", groceries_path, class: "nav-link" %>
-        </li>
-        <li class="nav-item px-2">
-          <%= link_to "Favorites", favorites_path, class: "nav-link" %>
-        </li>
-        <li class="nav-item px-2">
-          <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "nav-link" %>
-        </li>
-      <% else %>
-        <li class="nav-item px-2">
-          <%= link_to "Login", new_user_session_path, class: "nav-link" %>
-        </li>
-      <% end %>
-    </ul>
+<nav>
+  <div class="hamburger">
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
   </div>
-</div> -->
 
-    <nav>
-      <div class="hamburger">
-        <div class="line"></div>
-        <div class="line"></div>
-        <div class="line"></div>
-      </div>
-
+  <% if user_signed_in? %>
+    <%= link_to root_path, class: "navbar-user-icon" do %>
+      <%= image_tag current_user.image %>
+    <% end %>
+    <%= link_to groceries_path, class: "navbar-cart-icon" do %>
+      <i class="fas fa-shopping-basket cart-icon fa-2x"></i>
+    <% end %>
+    <p class="counter_basket"><%= groceries_counter %></p>
+  <% end %>
+  <ul class="nav-links">
     <% if user_signed_in? %>
-      <%= link_to root_path, class: "navbar-user-icon" do %>
-        <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier" %>
-      <% end %>
-      <%= link_to groceries_path, class: "navbar-cart-icon" do %>
-        <i class="fas fa-shopping-basket cart-icon fa-2x"></i>
-      <% end %>
-      <p class="counter_basket"><%= groceries_counter %></p>
-     <% end %>
-      <ul class="nav-links">
-        <% if user_signed_in? %>
-          <li><%= link_to "Home", root_path, class: "nav-link" %></li>
-          <li><%= link_to "Grocery List", groceries_path, class: "nav-link" %></li>
-          <li><%= link_to "Favorites", favorites_path, class: "nav-link" %></li>
-          <li><%= link_to "Log out", destroy_user_session_path, method: :delete, class: "nav-link" %></li>
-          <% else %>
-          <li><%= link_to "Login", new_user_session_path, class: "nav-link" %></li>
-        <% end %>
-      </ul>
-    </nav>
+      <li><%= link_to "Home", root_path, class: "nav-link" %></li>
+      <li><%= link_to "Grocery List", groceries_path, class: "nav-link" %></li>
+      <li><%= link_to "Favorites", favorites_path, class: "nav-link" %></li>
+      <li><%= link_to "Log out", destroy_user_session_path, method: :delete, class: "nav-link" %></li>
+      <% else %>
+      <li><%= link_to "Login", new_user_session_path, class: "nav-link" %></li>
+    <% end %>
+  </ul>
+</nav>
 
