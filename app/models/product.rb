@@ -6,8 +6,12 @@ class Product < ApplicationRecord
 
   validates :name, :brand, :nutriscore, presence: true
   validates_uniqueness_of :code
-
+ 
   def favorite?(user)
+    if user.present?
     user.favorites.where(product: self).any?
+    end
   end
+
+
 end
