@@ -32,7 +32,6 @@ class ProductsController < ApplicationController
     
     @markers = [] if @markers.nil?
     @markers << get_current_address(address) if address.present?
-    p @markers
     hash_of_store_products
   end
 
