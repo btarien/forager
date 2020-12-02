@@ -39,9 +39,19 @@ class ProductsController < ApplicationController
 
   def hash_of_store_products
     @hash = {}
-
+    nutri_scores = build_nutri_scores
+    
+    
     if params[:query].present?
       @store_products = StoreProduct.global_search(params[:query])
+    else 
+      @store_products = StoreProduct.all
+    end
+
+    if nutri_scores.any? 
+      @store_products = @store_products.includes(:product).filter do |store_product| 
+        nutri_scores.include? store_product.product.nutriscore
+      end
     end
 
     @store_products.each do |store_product|
@@ -53,6 +63,18 @@ class ProductsController < ApplicationController
     end
 
     @hash
+  end
+
+  def build_nutri_scores
+    nutri_hash = {
+      "nutri_a" => "a",
+      "nutri_b" => "b",
+      "nutri_c" => "c",
+      "nutri_d" => "d",
+      "nutri_e" => "e"
+    }
+    filtered_params = params.permit(:query,:commit,:nutri_a,:nutri_b,:nutri_c,:nutri_d,:nutri_e).to_h.keys
+    filtered_params.filter {|item| nutri_hash.key? item}.map {|item| nutri_hash[item]}
   end
 
   def get_current_address(address)

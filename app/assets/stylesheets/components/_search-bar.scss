@@ -65,4 +65,42 @@ font-weight: bold;
 height: 30px;
 
 }
+#query {
+  width: 300px;
+}
 
+.nutri {
+  text-align: center;
+  font-weight: bold;
+  font-size: 15px;
+  margin-left: 0px;
+  border-radius: 5px;
+  display: block;
+  padding-left: 3px;
+  padding-right: 3px;
+}
+.a-nutri {
+  background-color: #038141;
+  color: #73B996;
+}
+.b-nutri {
+  background-color: #85BB2F;
+  color: #BBD98C;
+}
+.c-nutri {
+  background-color: #FECB02;
+  color: #FFFFFF;
+}
+.d-nutri {
+  background-color: #EE8100;
+  color: #F6B972;
+}
+.e-nutri {
+  background-color: #E63E11;
+  color: #F1947B;
+}
+
+.boxing {
+
+margin-left: 2px;
+}
