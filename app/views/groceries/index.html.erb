@@ -1,12 +1,13 @@
-<div class="bg-success text-white" >
-  <h1 class="pt-2 text-center" style="text-decoration: 2px underline" >Grocery list</h1>
-  <%= link_to "", products_path, class: "fas fa-arrow-left ml-2", style: "text-decoration: none" %>
+<div class="bg-success text-white" style="display: flex; justify-content: space-between; border-top: 1px solid" >
+  <h1><%= link_to "", products_path, class: "fas fa-arrow-left ml-3 pt-2", style: "text-decoration: none; color: white" %></h1>
+  <h1 class="pt-2" style=" text-decoration: 2px underline" >Grocery list</h1>
+  <h1 class="fas fa-arrow-left mr-3 pt-2" style= "color: #97BB7F"></h1>
 </div>
 
 <div style="overflow: scroll;">
   <% @all_stores.each do |store| %>
     <div class="pt-3 mb-2 bg-white container">
-      <h1><u class="py-1 px-2" style="border-style: solid; text-decoration: none; border-color: #97BB7F;"><%= store %></u></h1>
+      <h1><u class="py-1 px-2" style="border-style: solid; text-decoration: none; border-color: #97BB7F; border-radius: 5px; color: #97BB7F"><%= store %></u></h1>
       <% @groceries.each do |grocery| %>
         <% new_product_array = @stores.select { |store_hash| store_hash[:product].product == grocery.product} %>
         <% new_store_array = new_product_array.map { |product| product[:store]}.flatten.uniq %>
