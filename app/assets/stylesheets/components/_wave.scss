@@ -1,11 +1,46 @@
 // #WAVE
+
+
+
+
+@media screen and (max-width: 1440px) {
+
 .wave-container {
     color: #FFF;
     bottom: 0;
     position: relative;
     position: fixed;
-    z-index: 990;
+    z-index: 1;
 
+  }
+
+  @keyframes animateWave {
+    0% {
+      transform: scale(1,0);
+    }
+    100% {
+      transform: scale(1,1);
+    }
+  }
+  .wave-container > svg {
+    display: inline-block;
+    transform-origin: bottom;
+    animation: animateWave 3000ms cubic-bezier(0.1, 1, 0.2, 1) forwards;
+    height: 70vh;
+    width: 100vw;
+    bottom: 0;
+    position: fixed;
+    position: absolute;
+}
+
+}
+
+@media screen and (max-width: 768px) {
+.wave-container {
+    color: #FFF;
+    bottom: 0;
+    position: relative;
+    position: fixed;
   }
 
   @keyframes animateWave {
@@ -25,4 +60,5 @@
     bottom: 0;
     position: fixed;
     position: absolute;
+}
 }
