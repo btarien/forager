@@ -1,12 +1,13 @@
-<div class="bg-success text-white" >
-  <h1 class="pt-2 text-center" style="text-decoration: 2px underline" >Grocery list</h1>
-  <%= link_to "", products_path, class: "fas fa-arrow-left ml-2", style: "text-decoration: none" %>
+<div class="bg-success text-white" style="display: flex; justify-content: space-between; border-top: 1px solid" >
+  <h1><%= link_to "", products_path, class: "fas fa-arrow-left ml-3 pt-2", style: "text-decoration: none; color: white" %></h1>
+  <h1 class="pt-2" style=" text-decoration: 2px underline" >Grocery list</h1>
+  <h1 class="fas fa-arrow-left mr-3 pt-2" style= "color: #97BB7F"></h1>
 </div>
 
 <div style="overflow: scroll;">
   <% @all_stores.each do |store| %>
     <div class="pt-3 mb-2 bg-white container">
-      <h1><u class="py-1 px-2" style="border-style: solid; text-decoration: none; border-color: #97BB7F;"><%= store %></u></h1>
+      <h1><u class="py-1 px-2" style="border-style: solid; text-decoration: none; border-color: #97BB7F; border-radius: 5px; color: #97BB7F"><%= store %></u></h1>
       <% @groceries.each do |grocery| %>
         <% new_product_array = @stores.select { |store_hash| store_hash[:product].product == grocery.product} %>
         <% new_store_array = new_product_array.map { |product| product[:store]}.flatten.uniq %>
@@ -36,103 +37,7 @@
             </div>
           </div>
         <% end %>
-
-        <!-- Modal -->
-        <div class="modal fade" id="product-info-<%= grocery.product.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content p-3">
-              <div class="modal-header row">
-                <div class="back">
-                  <i class="fas fa-arrow-left" data-dismiss="modal"></i>
-                </div>
-                <div class="options d-flex align-items-end">
-                  <% if @all_favorites.any? {|favv| favv.product == grocery.product } %>
-                    <i class='fa fa-heart m-2'></i>
-                  <% else %>
-                    <%= simple_form_for :@favorite, url: favorites_path do |f| %>
-                    <%= f.input :product_id, as: :hidden, input_html: {value: grocery.product.id} %>
-                    <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
-                    <%= button_tag type: 'submit', class: "button border-0 bg-white postfix", 'data-disable-with' => "<i class='fa fa-heart m-2'></i>" do %>
-                    <i class="fa fa-heart-o m-2" aria-hidden="true"></i>
-                  <% end %>
-              <% end %>
-            <% end %>
-          </div>
-              </div>
-              <div class="modal-body">
-                <div class="row border-bottom d-flex justify-content-between">
-                  <div class="col-8">
-                    <h1 class="modal-title"><%= grocery.product.name %></h1>
-                    <h2><%= grocery.product.brand %></h2>
-                  </div>
-                  <div class="col-4">
-                    <%= image_tag grocery.product.nutriscore_img, size: "100x50"%>
-                  </div>
-                </div>
-                <% nutrition = JSON.parse(grocery.product.nutrition, symbolize_names: true) %>
-                <% unless nutrition[:calories].nil? %>
-                  <div class="row justify-content-between my-5 mx-2">
-                    <div class="text-center d-flex flex-column justify-content-center">
-                      <!-- <ul class="chart-skills">
-                        <li><span></span></li>
-                        <li><span></span></li>
-                        <li><span></span></li>
-                      </ul> -->
-                      <h3 class="m-0" style="line-height: 1em;"><%= nutrition[:calories] %></h3>
-                      <p class="m-0" style="line-height: 1em;">cal</p>
-                    </div>
-                    <div class="text-center">
-                      <p class="m-0" style="color: blue; line-height: 1em"><%= ((nutrition[:carbohydrates][:total] * 4).fdiv(nutrition[:calories]) * 100).round %>%</p>
-                      <h3 class="m-0" style="line-height: 1em;"><%= nutrition[:carbohydrates][:total] %> g</h3>
-                      <p class="m-0" style="line-height: 1em">carbs</p>
-                    </div>
-                    <div class="text-center">
-                      <p class="m-0" style="color: red; line-height: 1em;"><%= ((nutrition[:fat][:total] * 4).fdiv(nutrition[:calories]) * 100).round %>%</p>
-                      <h3 class="m-0" style="line-height: 1em;"><%= nutrition[:fat][:total] %> g</h3>
-                      <p class="m-0" style="line-height: 1em;">fat</p>
-                    </div>
-                    <div class="text-center">
-                      <p class="m-0" style="color: purple; line-height: 1em;"><%= ((nutrition[:protein] * 4).fdiv(nutrition[:calories]) * 100).round %>%</p>
-                      <h3 class="m-0" style="line-height: 1em;"><%= nutrition[:protein]%> g</h3>
-                      <p class="m-0" style="line-height: 1em;">protein</p>
-                    </div>
-                  </div>
-                <% end %>
-                <div class="row justify-content-between bg-light p-2">
-                  <h3>Nutrition Facts</h3>
-                  <h3>per 100g</h3>
-                </div>
-                <% nutrition.each do |nutrient, value| %>
-                    <% if value.class == Hash %>
-                      <div class="row justify-content-between px-2">
-                        <h4><%= nutrient.capitalize %></h4>
-                        <h4><%= value.values.first %> g</h4>
-                      </div>
-                      <% value.except(:total).each do |subnutrient, grams| %>
-                        <div class="row justify-content-between ml-1 px-2">
-                          <h4 class="font-weight-light"><%= subnutrient.capitalize %></h4>
-                          <% if grams.nil? %>
-                            <h4 class="font-weight-light">-</h4>
-                          <% else %>
-                            <h4 class="font-weight-light"><%= grams %> g</h4>
-                          <% end %>
-                        </div>
-                      <% end %>
-                    <% else %>
-                      <div class="row justify-content-between px-2">
-                        <h4><%= nutrient.capitalize %></h4>
-                        <h4><%= value %> g</h4>
-                      </div>
-                    <% end %>
-                <% end %>
-                <div class="row mt-3">
-                  <h3>Ingredients</h3>
-                  <p class="p-2"><%= grocery.product.ingredients %></p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <%= render 'shared/product_info_modal', product: grocery.product %>
       <% end %>
     </div>
   <% end %>

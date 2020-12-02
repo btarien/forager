@@ -7,19 +7,70 @@
 
 <div class="container" style="background: white; margin-top: 30vh;">
 
-  <div class="product-search p-3">
-    <%= form_tag products_path, method: :get, :class=>"search_bar " do %>
-      <%= text_field_tag :query,
-        params[:query],
-        placeholder: "Find a product",
-        class: "form-control mr-sm-2 "%>
-      <div class="ml-3">
-          <%= submit_tag "🔍", class: "search-btn" %>
+  <div class="product-search p-1" style="width: 100%">
+    <%= form_tag products_path, method: :get, :class=>"search_bar d-flex justify-content-center" do %>
+    <div style="border-bottom: 1px #EEF0F2 solid;">
+      <div class="d-flex justfiy-content-between my-3">
+        <%= text_field_tag :query,
+          params[:query],
+          placeholder: "Find a product",
+          class: "form-control mr-sm-2 "
+        %>
+        <div class="ml-3">
+            <%= submit_tag "🔍", class: "search-btn" %>
+        </div>
       </div>
+      <div class="mr-5 pb-2 d-flex justify-content-around">
+        <div>
+          <%= label_tag(:nutri_a, "A", class: "nutri a-nutri") %>
+            <% if params[:nutri_a] %>
+              <a class="boxing"><%= check_box_tag(:nutri_a, "1", true) %></a>
+            <% else %>
+              <a class="boxing"><%= check_box_tag(:nutri_a) %></a>
+            <% end %>
+        </div>
+        <div>
+          <%= label_tag(:nutri_b, "B", class: "nutri b-nutri") %>
+            <% if params[:nutri_b] %>
+              <a class="boxing"><%= check_box_tag(:nutri_b, "1", true) %></a>
+            <% else %>
+              <a class="boxing"><%= check_box_tag(:nutri_b) %></a>
+            <% end %>
+        </div>
+        <div>
+          <%= label_tag(:nutri_c, "C", class: "nutri c-nutri") %>
+            <% if params[:nutri_c] %>
+              <a class="boxing"><%= check_box_tag(:nutri_c, "1", true) %></a>
+            <% else %>
+              <a class="boxing"><%= check_box_tag(:nutri_c) %></a>
+            <% end %>
+        </div>
+        <div>
+          <%= label_tag(:nutri_d, "D", class: "nutri d-nutri") %>
+            <% if params[:nutri_d] %>
+              <a class="boxing"><%= check_box_tag(:nutri_d, "1", true) %></a>
+            <% else %>
+              <a class="boxing"><%= check_box_tag(:nutri_d) %></a>
+            <% end %>
+        </div>
+        <div>
+          <%= label_tag(:nutri_e, "E", class: "nutri e-nutri") %>
+            <% if params[:nutri_e] %>
+              <a class="boxing"><%= check_box_tag(:nutri_e, "1", true) %></a>
+            <% else %>
+              <a class="boxing"><%= check_box_tag(:nutri_e) %></a>
+            <% end %>
+        </div>
+      </div>
+    </div>
     <% end %>
   </div>
 
+
+
+
+
   <% @hash.each do | product, store_array | %>
-    <%= render 'product', product: product, store_array: store_array, all_favorites: @all_favorites, all_groceries: @all_groceries %>
+    <%= render 'product', product: product, store_array: store_array, all_groceries: @all_groceries %>
   <% end %>
 </div>
