@@ -9,19 +9,18 @@
     <%= link_to root_path, class: "navbar-user-icon" do %>
       <%= image_tag current_user.image %>
     <% end %>
+    <%= link_to groceries_path, class: "navbar-cart-icon" do %>
+      <i class="fas fa-shopping-basket cart-icon fa-2x"></i>
+    <% end %>
+    <p class="counter_basket"><%= groceries_counter %></p>
   <% end %>
-  <%= link_to groceries_path, class: "navbar-cart-icon" do %>
-    <i class="fas fa-shopping-basket cart-icon fa-2x"></i>
-  <% end %>
-  <p class="counter_basket"><%= groceries_counter %></p>
-
   <ul class="nav-links">
     <% if user_signed_in? %>
       <li><%= link_to "Home", root_path, class: "nav-link" %></li>
       <li><%= link_to "Grocery List", groceries_path, class: "nav-link" %></li>
       <li><%= link_to "Favorites", favorites_path, class: "nav-link" %></li>
       <li><%= link_to "Log out", destroy_user_session_path, method: :delete, class: "nav-link" %></li>
-    <% else %>
+      <% else %>
       <li><%= link_to "Login", new_user_session_path, class: "nav-link" %></li>
     <% end %>
   </ul>
