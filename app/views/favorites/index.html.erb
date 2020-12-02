@@ -1,8 +1,9 @@
-<div class="bg-success text-white">
-  <h1 class="pt-2 text-center">Favorites</h1>
-  <%= link_to "", products_path, class: "fas fa-arrow-left ml-2", style: "text-decoration: none" %>
+<div class="bg-success text-white" style="display: flex; justify-content: space-between; border-top: 1px solid" >
+  <h1><%= link_to "", products_path, class: "fas fa-arrow-left ml-3 pt-2", style: "text-decoration: none; color: white" %></h1>
+  <h1 class="pt-2" style=" text-decoration: 2px underline">Favorites</h1>
+  <h1 class="fas fa-arrow-left mr-3 pt-2" style= "color: #97BB7F"></h1>
 </div>
-<div class="my-2 bg-white container">
+<div class=" pt-2 bg-white container">
   <% @favorites.each do |favorite| %>
     <div class="swiper-container favorite-card">
       <div class="swiper-wrapper">
@@ -12,7 +13,7 @@
           </div>
         </div>
         <div class="swiper-slide border-bottom p-2 d-flex align-items-center">
-          <img class="product-img mr-4" src="<%= favorite.product.product_img %>" alt=""  data-toggle="modal" data-target="#product-info-<%= favorite.product.id %>">
+          <img class="product-img mr-4 mb-2" src="<%= favorite.product.product_img %>" alt=""  data-toggle="modal" data-target="#product-info-<%= favorite.product.id %>">
           <h3 data-toggle="modal" data-target="#product-info-<%= favorite.product.id %>"><%= favorite.product.name %></h3>
         </div>
       </div>
