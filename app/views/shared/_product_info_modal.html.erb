@@ -1,24 +1,23 @@
-<!-- Modal -->
 <div class="modal fade" id="product-info-<%= product.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content p-3">
-      <div class="modal-header row">
+      <div class="modal-header row align-items-center" style="border: 5px solid aqua;">
         <div class="back">
-          <i class="fas fa-arrow-left" data-dismiss="modal"></i>
+          <i class="fas fa-arrow-left fa-2x" data-dismiss="modal"></i>
         </div>
-        <div class="options d-flex align-items-end">
+        <div class="options">
           <% if product.favorite?(current_user) %>
-            <i class='fa fa-heart m-2'></i>
+            <i class="fa fa-heart m-2 fa-2x"></i>
           <% else %>
             <%= simple_form_for :@favorite, url: favorites_path do |f| %>
-            <%= f.input :product_id, as: :hidden, input_html: {value: product.id} %>
-            <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
-            <%= button_tag type: 'submit', class: "button border-0 bg-white postfix", 'data-disable-with' => "<i class='fa fa-heart m-2'></i>" do %>
-            <i class="fa fa-heart-o m-2" aria-hidden="true"></i>
+              <%= f.input :product_id, as: :hidden, input_html: {value: product.id} %>
+              <%= button_tag type: 'submit', class: "button border-0 bg-white postfix", 'data-disable-with' => "<i class='fa fa-heart m-2'></i>" do %>
+                <i class="fa fa-heart-o m-2 fa-2x" aria-hidden="true"></i>
+              <% end %>
+              <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
+            <% end %>
           <% end %>
-      <% end %>
-    <% end %>
-  </div>
+        </div>
       </div>
       <div class="modal-body">
         <div class="row border-bottom d-flex justify-content-between">
