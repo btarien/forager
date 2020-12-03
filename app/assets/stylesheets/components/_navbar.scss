@@ -55,6 +55,7 @@ nav {
   justify-content: flex-start;
   align-items: flex-end;
   background-color: $primary;
+  clip-path: circle(0px at 100% 0%);
   -webkit-clip-path: circle(0px at 100% 0%);
   transition: all 1s ease-out;
   pointer-events: none;
@@ -72,6 +73,7 @@ nav {
 }
 
 .nav-links.open {
+  clip-path: circle(300px at 100% 0%);
   -webkit-clip-path: circle(300px at 100% 0%);
   pointer-events: all;
 }
@@ -100,6 +102,7 @@ nav {
   }
 
   .nav-links.open {
+    clip-path: circle(1000px at 100% 0%);
     -webkit-clip-path: circle(1000px at 100% 0%);
   }
 }
