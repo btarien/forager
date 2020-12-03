@@ -1,18 +1,21 @@
 <nav>
-  <div class="hamburger">
-    <div class="line"></div>
-    <div class="line"></div>
-    <div class="line"></div>
-  </div>
-
   <% if user_signed_in? %>
-    <%= link_to root_path, class: "navbar-user-icon" do %>
-      <%= image_tag current_user.image %>
+    <%= image_tag current_user.image, class: "avatar" %>
+    <%= link_to root_path do  %>
+      <%= image_tag 'logo.png', class: "logo" %>
     <% end %>
-    <%= link_to groceries_path, class: "navbar-cart-icon" do %>
-      <i class="fas fa-shopping-basket cart-icon fa-2x"></i>
-    <% end %>
-    <p class="counter_basket"><%= groceries_counter %></p>
+    <div class="d-flex align-items-center">
+      <div class="position-relative">
+        <%= link_to groceries_path do %>
+          <i class="fas fa-shopping-basket fa-2x text-white"></i>
+        <% end %>
+        <p class="grocery-counter"><%= groceries_counter %></p>
+      </div>
+      <i class="fas fa-bars fa-2x text-white hamburger"></i>
+    </div>
+  <% else %>
+    <%= image_tag 'logo.png', class: "logo" %>
+    <i class="fas fa-bars fa-2x text-white hamburger"></i>
   <% end %>
   <ul class="nav-links">
     <% if user_signed_in? %>
@@ -25,4 +28,3 @@
     <% end %>
   </ul>
 </nav>
-
