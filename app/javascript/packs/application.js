@@ -31,6 +31,7 @@ import { initNavbarAnimation } from '../plugins/init_navbar_animation';
 
 
 
+
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
 
