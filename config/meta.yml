@@ -1,0 +1,4 @@
+meta_product_name: "Healthy Forager"
+meta_title: "Healthy Forager - The Healthiest choice for you"
+meta_description: "Healthy Forager - a web app that searches local store inventories and lists the healthiest options for a certain product with an associated health score"
+meta_image: "cover.png" # should exist in `app/assets/images/`
