@@ -18,13 +18,19 @@
       <%= image_tag product.nutriscore_img, class: "nutriscore-img" %>
     </div>
     <div id='button' data-product-id='<%= product.id %>' class="col-2 grocery-submit-button">
-      <% if all_groceries.any? {|gro| gro.product == product } %>
-        <i class="fas fa-check text-success fa-2x"></i>
+      <% if user_signed_in? %>
+        <% if all_groceries.any? {|gro| gro.product == product } %>
+          <i class="fas fa-check text-success fa-2x"></i>
+        <% else %>
+          <%= button_tag type: 'submit', class: "button add-grocery border-0 bg-white postfix" do %>
+            <i class="fas fa-shopping-basket fa-2x" aria-hidden="true"></i>
+          <% end %>
+          <i class='fas fa-check text-success fa-2x grocery-added d-none'></i>
+        <% end %>
       <% else %>
-        <%= button_tag type: 'submit', class: "button add-grocery border-0 bg-white postfix" do %>
+        <%= link_to new_user_session_path do %>
           <i class="fas fa-shopping-basket fa-2x" aria-hidden="true"></i>
         <% end %>
-        <i class='fas fa-check text-success fa-2x grocery-added d-none'></i>
       <% end %>
     </div>
   <% end %>

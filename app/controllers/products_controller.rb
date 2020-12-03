@@ -4,14 +4,14 @@ class ProductsController < ApplicationController
   def index
     address = params[:address] || session[:search_location]
     results = Geocoder.search(address) unless address.nil?
-      if address.present? && results.present?
-        session[:search_location] = address
-        @coordinates = results.first.coordinates
-      else 
-        flash.alert = "Please enter an address."
-        redirect_to root_path
-      end
-    
+    if address.present? && results.present?
+      session[:search_location] = address
+      @coordinates = results.first.coordinates
+    else
+      flash.alert = "Please enter an address."
+      redirect_to root_path
+    end
+
     # convert address into latitude longitude
     # @coordinates = [address.longitude, address.latitude]
     # in the view, read these @coordinates
@@ -21,7 +21,6 @@ class ProductsController < ApplicationController
     @store_products = StoreProduct.all
     @stores = Store.all
 
-   
     @markers = @stores.geocoded.map do |store|
       {
         lat: store.latitude,
@@ -31,7 +30,7 @@ class ProductsController < ApplicationController
 
       }
     end
-    
+
     @markers = [] if @markers.nil?
     @markers << get_current_address(address) if address.present?
     hash_of_store_products
@@ -42,16 +41,15 @@ class ProductsController < ApplicationController
   def hash_of_store_products
     @hash = {}
     nutri_scores = build_nutri_scores
-    
-    
+
     if params[:query].present?
       @store_products = StoreProduct.global_search(params[:query])
-    else 
+    else
       @store_products = StoreProduct.all
     end
 
-    if nutri_scores.any? 
-      @store_products = @store_products.includes(:product).filter do |store_product| 
+    if nutri_scores.any?
+      @store_products = @store_products.includes(:product).filter do |store_product|
         nutri_scores.include? store_product.product.nutriscore
       end
     end
@@ -75,8 +73,8 @@ class ProductsController < ApplicationController
       "nutri_d" => "d",
       "nutri_e" => "e"
     }
-    filtered_params = params.permit(:query,:commit,:nutri_a,:nutri_b,:nutri_c,:nutri_d,:nutri_e).to_h.keys
-    filtered_params.filter {|item| nutri_hash.key? item}.map {|item| nutri_hash[item]}
+    filtered_params = params.permit(:query, :commit, :nutri_a, :nutri_b, :nutri_c, :nutri_d, :nutri_e).to_h.keys
+    filtered_params.filter { |item| nutri_hash.key? item }.map { |item| nutri_hash[item] }
   end
 
   def get_current_address(address)
@@ -86,6 +84,6 @@ class ProductsController < ApplicationController
       lat: coordinates.first,
       lng: coordinates.last,
       imageUrl: helpers.asset_url('map-marker.png')
-    } 
+    }
   end
 end
