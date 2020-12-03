@@ -12,12 +12,12 @@ Product.destroy_all
 Store.destroy_all
 
 puts 'creating users...'
-User.create!(email: "alice@example.com", password: "123456", image: 'https://source.unsplash.com/a7itXABwl8U/100x100')
-User.create!(email: "bob@example.com", password: "123456", image: 'https://source.unsplash.com/8PMvB4VyVXA/100x100')
+alice = User.create!(email: "alice@example.com", password: "123456", image: 'https://source.unsplash.com/a7itXABwl8U/100x100')
+bob = User.create!(email: "bob@example.com", password: "123456", image: 'https://source.unsplash.com/8PMvB4VyVXA/100x100')
 
 puts 'creating stores...'
-Store.create!(name: 'Aldi', address: 'Schwanthalerstraße 14, 80336 München', url: 'https://www.aldi-sued.de/de/suchergebnis/produkte.html?search=', name_class: '.product-title', imgurl: 'aldi.png')
-Store.create!(name: 'Edeka', address: 'Schwanthalerstraße 31, 80336 München', url: 'https://e-center-knauer.edeka-shops.de/en/search?SearchTerm=', name_class: '.product-title', imgurl: 'edeka.png')
+aldi = Store.create!(name: 'Aldi', address: 'Schwanthalerstraße 14, 80336 München', url: 'https://www.aldi-sued.de/de/suchergebnis/produkte.html?search=', name_class: '.product-title', imgurl: 'aldi.png')
+edeka = Store.create!(name: 'Edeka', address: 'Schwanthalerstraße 31, 80336 München', url: 'https://e-center-knauer.edeka-shops.de/en/search?SearchTerm=', name_class: '.product-title', imgurl: 'edeka.png')
 
 puts 'creating products and store-products...'
 products = ['joghurt', 'kase', 'protein bar', 'muesli']
@@ -83,14 +83,14 @@ products.each do |product|
   end
 end
 
-StoreProduct.create!(product: Product.first, store: Store.second)
-StoreProduct.create!(product: Product.second, store: Store.second)
-StoreProduct.create!(product: Product.third, store: Store.second)
+item1 = StoreProduct.create!(product: Product.first, store: Store.second)
+item2 = StoreProduct.create!(product: Product.second, store: Store.second)
+item3 = StoreProduct.create!(product: Product.third, store: Store.second)
 
 puts 'creating groceries...'
-Grocery.create!(quantity: 2, user: User.first, store_product: StoreProduct.first)
-Grocery.create!(quantity: 1, user: User.first, store_product: StoreProduct.second)
-Grocery.create!(quantity: 6, user: User.first, store_product: StoreProduct.third)
+Grocery.create!(user: alice, store_product: StoreProduct.first)
+Grocery.create!(user: alice, store_product: item2)
+Grocery.create!(user: alice, store_product: item3)
 
 puts 'creating favorites...'
 Favorite.create!(product: Product.first, user: User.first)
