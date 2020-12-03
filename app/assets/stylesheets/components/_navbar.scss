@@ -36,10 +36,10 @@ nav {
   margin-right: 15px;
   cursor: pointer;
   z-index: 3;
-}
 
-.fas:hover {
-  opacity: 50%;
+  &:hover {
+    opacity: 50%;
+  }
 }
 
 .nav-links {
@@ -55,26 +55,25 @@ nav {
   justify-content: flex-start;
   align-items: flex-end;
   background-color: $primary;
-  -webkit-clip-path: circle(0px at 90% -10%);
+  -webkit-clip-path: circle(0px at 100% 0%);
   transition: all 1s ease-out;
   pointer-events: none;
+
+  li {
+    position: relative;
+    right: 0;
+
+    a {
+      color: white;
+      text-decoration: none;
+      font-size: 25px;
+    }
+  }
 }
 
 .nav-links.open {
-  -webkit-clip-path: circle(300px at 90% -10%);
+  -webkit-clip-path: circle(300px at 100% 0%);
   pointer-events: all;
-}
-
-.nav-links li {
-  position: relative;
-  right: 0;
-  z-index: 1000;
-}
-
-.nav-links li a {
-  color: white;
-  text-decoration: none;
-  font-size: 25px;
 }
 
 .grocery-counter {
@@ -94,7 +93,6 @@ nav {
   background-color: $red;
 }
 
-
 @media screen and (max-width: 768px) {
   .nav-links {
     justify-content: space-around;
@@ -102,6 +100,6 @@ nav {
   }
 
   .nav-links.open {
-    -webkit-clip-path: circle(1000px at 90% -10%);
+    -webkit-clip-path: circle(1000px at 100% 0%);
   }
 }
