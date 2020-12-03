@@ -28,6 +28,7 @@ import { initMapbox } from '../plugins/init_mapbox';
 import { initSwiping } from '../plugins/init_swiping';
 import { initAutocomplete } from '../plugins/init_autocomplete';
 import { initNavbarAnimation } from '../plugins/init_navbar_animation';
+import { initError } from "../plugins/init_404";
 
 
 
